@@ -7,6 +7,7 @@ humanEvaluation/public/tiles/
 humanEvaluation/public/gbm/
 humanEvaluation/public/wsi/
 WSI/unique_ids.txt
+WSI/sampled_reports.csv
 dist/
 humanEvaluation/dist/
 .vscode/
