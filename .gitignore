@@ -1,0 +1,10 @@
+.DS_Store
+.env
+node_modules/
+humanEvaluation/node_modules/
+WSI/tiles/
+humanEvaluation/public/tiles/
+dist/
+humanEvaluation/dist/
+.vscode/
+humanEvaluation/.vscode/
