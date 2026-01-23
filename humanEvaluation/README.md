@@ -1,5 +1,48 @@
-# Vue 3 + TypeScript + Vite
+# Human Evaluation UI
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Prerequisites
+- Node.js 18+ (recommended)
+- npm (comes with Node.js)
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Install
+```bash
+cd humanEvaluation
+npm install
+```
+
+## Run locally
+```bash
+npm run dev
+```
+
+Then open the local URL printed in the terminal (usually `http://localhost:5173`).
+
+## Build for production
+```bash
+npm run build
+```
+
+## Preview production build
+```bash
+npm run preview
+```
+
+## Deploy to GitHub Pages
+1) Set the Vite base path in `humanEvaluation/vite.config.ts` to match your repo name:
+   - `base: "/humanEvaluationUI/"`
+2) Build the site:
+```bash
+npm run build
+```
+3) Deploy the `dist/` folder to GitHub Pages (one simple option is `gh-pages`):
+```bash
+npm install --save-dev gh-pages
+npx gh-pages -d dist
+```
+4) In GitHub, set Pages to use the `gh-pages` branch.
+
+If your data files are not in the repo (e.g. tiles), host them elsewhere and set `VITE_TILES_BASE_URL` accordingly.
+
+## Notes
+- The app expects data files in `WSI/` at the repo root (e.g. `WSI/cases_by_model.json`, `WSI/medGemma.json`, `WSI/sampled_reports.csv`).
+- Large tiles folders are excluded from the repo by default.
