@@ -32,7 +32,7 @@ type PairedCase = {
 type RawSingleCase = {
   id: string;
   label: string;
-  model: { source_id: string; source_model: string; report: string; answer?: string };
+  model: { source_id: string; report: string; answer?: string };
 };
 
 const prismCases = ref<SingleModelCase[]>([]);
@@ -243,21 +243,21 @@ onMounted(() => {
     });
 
   Promise.all([casesPromise, medGemmaPromise])
-    .then(([payload, medGemmaPayload]: [{ prism: RawSingleCase[]; sf: RawSingleCase[] }, Record<string, string>]) => {
+    .then(([payload, medGemmaPayload]: [{ mod1: RawSingleCase[]; mod2: RawSingleCase[] }, Record<string, string>]) => {
       const mapOne = (c: RawSingleCase): SingleModelCase => ({
         id: c.id,
         label: c.label,
         model: {
           sourceId: c.model.source_id,
-          sourceModel: c.model.source_model,
+          sourceModel: "",
           report: c.model.report,
           wsiDziUrl: `${tilesBaseUrl}/tiles/${c.model.source_id}.dzi`,
           answer: c.model.answer ?? "",
         },
       });
 
-      prismCases.value = payload.prism.map(mapOne);
-      sfCases.value = payload.sf.map(mapOne);
+      prismCases.value = payload.mod1.map(mapOne);
+      sfCases.value = payload.mod2.map(mapOne);
       medGemmaReports.value = medGemmaPayload ?? {};
 
       const saved = loadState();

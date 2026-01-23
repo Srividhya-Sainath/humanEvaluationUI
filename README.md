@@ -4,6 +4,17 @@
 - Node.js 18+ (recommended)
 - npm (comes with Node.js)
 
+### Install Node.js (macOS)
+```bash
+brew install node
+```
+
+### Install Node.js (Linux)
+```bash
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
 ## Install
 ```bash
 cd humanEvaluation
