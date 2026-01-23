@@ -21,9 +21,9 @@ Then open the local URL printed in the terminal (usually `http://localhost:5173`
 Download the image tiles from:
 - https://drive.google.com/drive/folders/1PxhFmqSgJ9JKHecZlIHBCu1LuJGooYy3?usp=sharing
 
-Unzip all files and place the `tiles` folder here:
+Unzip all files and place the `tiles` folder here (relative to the repo root):
 ```
-/Users/vidhyasainath/Desktop/humanEvaluation/WSI/tiles
+WSI/tiles
 ```
 
 After placing the folder, restart the dev server so the UI can load the images.
