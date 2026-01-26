@@ -54,7 +54,7 @@
         ></div>
         <div
           class="absolute -top-3 -translate-x-1/2 h-9 w-9 rounded-full border border-blue-200/70 shadow-md bg-center bg-cover"
-          :style="{ left: progressPercent + '%', backgroundImage: 'url(/image.png)' }"
+          :style="{ left: progressPercent + '%', backgroundImage: `url(${progressImageUrl})` }"
           title="WSI progress"
         ></div>
       </div>
@@ -72,6 +72,8 @@
 </template>
 
 <script setup lang="ts">
+
+const progressImageUrl = `${import.meta.env.BASE_URL}image.png`;
 
 defineEmits<{
   (e: "prev"): void;
