@@ -40,15 +40,20 @@ const sfCases = ref<SingleModelCase[]>([]);
 const medGemmaReports = ref<Record<string, string>>({});
 const pairedCases = computed<PairedCase[]>(() => {
   const total = Math.min(prismCases.value.length, sfCases.value.length);
-  return Array.from({ length: total }, (_, index) => {
+  const pairs: PairedCase[] = [];
+  for (let index = 0; index < total; index += 1) {
+    const model1Case = prismCases.value[index];
+    const model2Case = sfCases.value[index];
+    if (!model1Case || !model2Case) continue;
     const num = String(index + 1).padStart(3, "0");
-    return {
+    pairs.push({
       id: `pair-${num}`,
       label: `Case ${num}`,
-      model1: prismCases.value[index].model,
-      model2: sfCases.value[index].model,
-    };
-  });
+      model1: model1Case.model,
+      model2: model2Case.model,
+    });
+  }
+  return pairs;
 });
 
 const isIncorrect = (answer: string) => answer.trim().toUpperCase() === "IC";
@@ -71,7 +76,8 @@ const tabs = [
   { id: "best", label: "Pick The Best Report" },
 ] as const;
 
-const tilesBaseUrl = (import.meta.env.VITE_TILES_BASE_URL as string) || "/wsi";
+const baseUrl = import.meta.env.BASE_URL || "/";
+const tilesBaseUrl = (import.meta.env.VITE_TILES_BASE_URL as string) || `${baseUrl}wsi`;
 
 const activeCases = computed(() => {
   if (activeTab.value === "val-m1") return prismCases.value;
@@ -162,14 +168,14 @@ function nextCase() {
   if (activeTab.value === "val-m1") {
     activeTab.value = "val-m2";
     if (!activeCaseIdByTab.value["val-m2"] && sfCases.value.length > 0) {
-      activeCaseIdByTab.value["val-m2"] = sfCases.value[0].id;
+      activeCaseIdByTab.value["val-m2"] = sfCases.value[0]?.id ?? "";
     }
     return;
   }
   if (activeTab.value === "val-m2") {
     activeTab.value = "best";
     if (!activeCaseIdByTab.value.best && filteredPairedCases.value.length > 0) {
-      activeCaseIdByTab.value.best = filteredPairedCases.value[0].id;
+      activeCaseIdByTab.value.best = filteredPairedCases.value[0]?.id ?? "";
     }
   }
 }
@@ -203,6 +209,55 @@ function ensureCaseState(caseId: string) {
   if (!valModel1.value[caseId]) valModel1.value[caseId] = { rating: null, justification: "" };
   if (!valModel2.value[caseId]) valModel2.value[caseId] = { rating: null, justification: "" };
   if (!bestPick.value[caseId]) bestPick.value[caseId] = { selectedId: null, justification: "" };
+}
+
+function updatePrismRating(v: Rating | null) {
+  const c = currentPrismCase.value;
+  if (!c) return;
+  ensureCaseState(c.id);
+  const entry = valModel1.value[c.id];
+  if (!entry) return;
+  entry.rating = v;
+}
+function updatePrismJustification(v: string) {
+  const c = currentPrismCase.value;
+  if (!c) return;
+  ensureCaseState(c.id);
+  const entry = valModel1.value[c.id];
+  if (!entry) return;
+  entry.justification = v;
+}
+function updateSfRating(v: Rating | null) {
+  const c = currentSfCase.value;
+  if (!c) return;
+  ensureCaseState(c.id);
+  const entry = valModel2.value[c.id];
+  if (!entry) return;
+  entry.rating = v;
+}
+function updateSfJustification(v: string) {
+  const c = currentSfCase.value;
+  if (!c) return;
+  ensureCaseState(c.id);
+  const entry = valModel2.value[c.id];
+  if (!entry) return;
+  entry.justification = v;
+}
+function updateBestSelected(v: string | null) {
+  const c = currentPairCase.value;
+  if (!c) return;
+  ensureCaseState(c.id);
+  const entry = bestPick.value[c.id];
+  if (!entry) return;
+  entry.selectedId = v;
+}
+function updateBestJustification(v: string) {
+  const c = currentPairCase.value;
+  if (!c) return;
+  ensureCaseState(c.id);
+  const entry = bestPick.value[c.id];
+  if (!entry) return;
+  entry.justification = v;
 }
 
 function loadState(): PersistedState | null {
@@ -413,8 +468,8 @@ const currentReportsForBest = computed(() => {
               :wsiDziUrl="currentPrismCase?.model.wsiDziUrl || ''"
               :modelValueRating="valModel1[currentPrismCase?.id ?? '']?.rating ?? null"
               :modelValueJustification="valModel1[currentPrismCase?.id ?? '']?.justification ?? ''"
-              @update:rating="(v) => currentPrismCase && (valModel1[currentPrismCase.id].rating = v)"
-              @update:justification="(v) => currentPrismCase && (valModel1[currentPrismCase.id].justification = v)"
+              @update:rating="updatePrismRating"
+              @update:justification="updatePrismJustification"
             />
 
             <ValidationTab
@@ -426,8 +481,8 @@ const currentReportsForBest = computed(() => {
               :wsiDziUrl="currentSfCase?.model.wsiDziUrl || ''"
               :modelValueRating="valModel2[currentSfCase?.id ?? '']?.rating ?? null"
               :modelValueJustification="valModel2[currentSfCase?.id ?? '']?.justification ?? ''"
-              @update:rating="(v) => currentSfCase && (valModel2[currentSfCase.id].rating = v)"
-              @update:justification="(v) => currentSfCase && (valModel2[currentSfCase.id].justification = v)"
+              @update:rating="updateSfRating"
+              @update:justification="updateSfJustification"
             />
 
             <BestReportTab
@@ -437,8 +492,8 @@ const currentReportsForBest = computed(() => {
               :wsiDziUrl="currentPairCase?.model1.wsiDziUrl || ''"
               :selectedId="bestPick[currentPairCase?.id ?? '']?.selectedId ?? null"
               :justification="bestPick[currentPairCase?.id ?? '']?.justification ?? ''"
-              @update:selectedId="(v) => currentPairCase && (bestPick[currentPairCase.id].selectedId = v)"
-              @update:justification="(v) => currentPairCase && (bestPick[currentPairCase.id].justification = v)"
+              @update:selectedId="updateBestSelected"
+              @update:justification="updateBestJustification"
             />
           </Tabs>
         </div>
@@ -452,7 +507,7 @@ const currentReportsForBest = computed(() => {
             :class="disablePrev ? 'opacity-40 cursor-not-allowed hover:translate-y-0 hover:shadow-sm' : ''"
             title="Previous case (←)"
           >
-            <img src="/wsi/image.png" alt="Previous" class="h-5 w-5 inline-block -scale-x-100" />
+            <img :src="`${tilesBaseUrl}/image.png`" alt="Previous" class="h-5 w-5 inline-block -scale-x-100" />
           </button>
           <button
             type="button"
@@ -462,7 +517,7 @@ const currentReportsForBest = computed(() => {
             :class="disableNext ? 'opacity-40 cursor-not-allowed hover:translate-y-0 hover:shadow-sm' : ''"
             title="Next case (→)"
           >
-            <img src="/wsi/image.png" alt="Next" class="h-5 w-5 inline-block" />
+            <img :src="`${tilesBaseUrl}/image.png`" alt="Next" class="h-5 w-5 inline-block" />
           </button>
         </div>
       </div>

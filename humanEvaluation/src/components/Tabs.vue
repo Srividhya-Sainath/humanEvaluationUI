@@ -24,7 +24,7 @@ type TabId = string;
 
 defineProps<{
   modelValue: TabId;
-  tabs: { id: TabId; label: string }[];
+  tabs: ReadonlyArray<{ id: TabId; label: string }>;
 }>();
 
 defineEmits<{ (e: "update:modelValue", v: TabId): void }>();
