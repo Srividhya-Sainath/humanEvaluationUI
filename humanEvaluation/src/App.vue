@@ -77,7 +77,13 @@ const tabs = [
 ] as const;
 
 const baseUrl = import.meta.env.BASE_URL || "/";
-const tilesBaseUrl = (import.meta.env.VITE_TILES_BASE_URL as string) || `${baseUrl}wsi`;
+const rawTilesBaseUrl = (import.meta.env.VITE_TILES_BASE_URL as string | undefined) ?? "";
+const normalizedTilesBaseUrl = rawTilesBaseUrl.replace(/\/$/, "");
+const tilesBaseUrl = rawTilesBaseUrl
+  ? normalizedTilesBaseUrl.endsWith("/wsi")
+    ? normalizedTilesBaseUrl
+    : `${normalizedTilesBaseUrl}/wsi`
+  : `${baseUrl}wsi`;
 
 const activeCases = computed(() => {
   if (activeTab.value === "val-m1") return prismCases.value;

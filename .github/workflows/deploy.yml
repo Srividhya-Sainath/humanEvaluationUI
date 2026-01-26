@@ -35,6 +35,8 @@ jobs:
       - name: Build
         working-directory: humanEvaluation
         run: npm run build
+        env:
+          VITE_TILES_BASE_URL: https://d38zzolz8bvkf3.cloudfront.net/wsi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
