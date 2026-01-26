@@ -28,7 +28,7 @@ function initViewer() {
 
   viewer = OpenSeadragon({
     element: osdEl.value,
-    prefixUrl: "/openseadragon-images/",
+    prefixUrl: `${import.meta.env.BASE_URL}openseadragon-images/`,
     tileSources: props.dziUrl,
     showNavigator: true,
     zoomPerScroll: 1.2,
