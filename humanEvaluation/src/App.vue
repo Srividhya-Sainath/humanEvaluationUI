@@ -656,7 +656,9 @@ const currentReportsForBest = computed(() => {
   ];
   return reports;
 });
-const currentReportsForHallucination = computed(() => {
+const currentReportsForHallucination = computed<
+  { id: "model1" | "model2"; name: string; text: string }[]
+>(() => {
   const c = currentHallucinationCase.value;
   if (!c) return [];
   return [
