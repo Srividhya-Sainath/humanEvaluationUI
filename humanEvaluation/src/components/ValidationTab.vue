@@ -1,7 +1,7 @@
 <template>
-  <div class="grid grid-cols-1 xl:grid-cols-2 gap-3 h-full min-h-0 overflow-hidden">
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-3">
     <!-- Left: WSI placeholder -->
-    <section class="flex flex-col min-h-0">
+    <section class="flex flex-col">
       <div class="flex items-baseline justify-between mb-2">
         <h3 class="text-sm font-semibold text-slate-200">WSI</h3>
       </div>
@@ -14,7 +14,7 @@
     </section>
 
     <!-- Right -->
-    <section class="flex flex-col min-h-0 gap-3 overflow-auto pr-1">
+    <section class="flex flex-col gap-3">
       <h3 class="text-lg font-semibold text-slate-900">
         {{ title }}
       </h3>

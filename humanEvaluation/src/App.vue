@@ -669,7 +669,7 @@ const currentReportsForHallucination = computed<
 </script>
 
 <template>
-  <div class="h-screen w-screen flex flex-col overflow-hidden bg-gradient-to-br from-sky-50 via-blue-50 to-purple-50 text-slate-900">
+  <div class="min-h-screen w-screen flex flex-col bg-gradient-to-br from-sky-50 via-blue-50 to-purple-50 text-slate-900">
     <header class="flex-shrink-0 border-b border-blue-100/70 px-6 py-4">
       <h1 class="text-xl md:text-2xl font-extrabold text-center tracking-tight text-slate-900">
         Human Evaluation UI
@@ -695,14 +695,14 @@ const currentReportsForHallucination = computed<
       />
     </div>
 
-    <main class="flex-1 overflow-hidden px-4 md:px-6 py-4">
-      <div v-if="currentCase" class="h-full min-h-0 flex flex-col">
+    <main class="flex-1 px-4 md:px-6 py-4">
+      <div v-if="currentCase" class="flex flex-col">
         <!-- ensure state exists -->
         <div class="hidden">
           {{ ensureActiveState() }}
         </div>
 
-        <div class="flex-1 min-h-0">
+        <div>
           <Tabs v-model="activeTab" :tabs="tabs">
             <ValidationTab
               v-if="activeTab === 'val-m1'"
