@@ -4,9 +4,17 @@ import Tabs from "./components/Tabs.vue";
 import CaseNav from "./components/CaseNav.vue";
 import ValidationTab from "./components/ValidationTab.vue";
 import BestReportTab from "./components/BestReportTab.vue";
+import HallucinationTab from "./components/HallucinationTab.vue";
 
 type Rating = "totally" | "partially" | "incorrect" | "indeterminate";
-type TabId = "val-m1" | "val-m2" | "best";
+type StyleRating = "1" | "2" | "3" | "4" | "5";
+type HallucinationType =
+  | "typeI"
+  | "typeII"
+  | "typeIII"
+  | "misclassification"
+  | "none";
+type TabId = "val-m1" | "val-m2" | "best" | "hallucination";
 
 type CaseReport = {
   sourceId: string;
@@ -68,12 +76,14 @@ const activeCaseIdByTab = ref<Record<TabId, string>>({
   "val-m1": "",
   "val-m2": "",
   best: "",
+  hallucination: "",
 });
 
 const tabs = [
   { id: "val-m1", label: "Pathology Report Rating (Model 1)" },
   { id: "val-m2", label: "Pathology Report Rating (Model 2)" },
   { id: "best", label: "Pick The Best Report" },
+  { id: "hallucination", label: "Hallucination Check" },
 ] as const;
 
 const baseUrl = import.meta.env.BASE_URL || "/";
@@ -88,7 +98,8 @@ const tilesBaseUrl = rawTilesBaseUrl
 const activeCases = computed(() => {
   if (activeTab.value === "val-m1") return prismCases.value;
   if (activeTab.value === "val-m2") return sfCases.value;
-  return filteredPairedCases.value;
+  if (activeTab.value === "best") return filteredPairedCases.value;
+  return pairedCases.value;
 });
 
 const activeCaseId = computed(() => activeCaseIdByTab.value[activeTab.value]);
@@ -98,43 +109,90 @@ const currentCase = computed(() => activeCases.value[caseIndex.value] ?? null);
 const currentPrismCase = computed(() => prismCases.value.find((c) => c.id === activeCaseIdByTab.value["val-m1"]) ?? null);
 const currentSfCase = computed(() => sfCases.value.find((c) => c.id === activeCaseIdByTab.value["val-m2"]) ?? null);
 const currentPairCase = computed(() => filteredPairedCases.value.find((c) => c.id === activeCaseIdByTab.value.best) ?? null);
+const currentHallucinationCase = computed(
+  () => pairedCases.value.find((c) => c.id === activeCaseIdByTab.value.hallucination) ?? null
+);
 
 const disablePrev = computed(() => caseIndex.value <= 0);
-const activeJustification = computed(() => {
+const activeValidationReady = computed(() => {
   const activeId = activeCaseId.value;
-  if (!activeId) return "";
-  if (activeTab.value === "val-m1") return valModel1.value[activeId]?.justification ?? "";
-  if (activeTab.value === "val-m2") return valModel2.value[activeId]?.justification ?? "";
-  return bestPick.value[activeId]?.justification ?? "";
+  if (!activeId) return false;
+  if (activeTab.value === "val-m1") {
+    const entry = valModel1.value[activeId];
+    if (!entry) return false;
+    return (
+      !!entry.rating &&
+      !!entry.styleRating &&
+      entry.correctnessJustification.trim().length > 0 &&
+      entry.styleJustification.trim().length > 0
+    );
+  }
+  if (activeTab.value === "val-m2") {
+    const entry = valModel2.value[activeId];
+    if (!entry) return false;
+    return (
+      !!entry.rating &&
+      !!entry.styleRating &&
+      entry.correctnessJustification.trim().length > 0 &&
+      entry.styleJustification.trim().length > 0
+    );
+  }
+  if (activeTab.value === "best") {
+    const entry = bestPick.value[activeId];
+    if (!entry) return false;
+    return !!entry.selectedId && entry.justification.trim().length > 0;
+  }
+  const entry = hallucinationCheck.value[activeId];
+  if (!entry) return false;
+  return !!entry.model1.type && !!entry.model2.type;
 });
 
 const disableNext = computed(() => {
   if (caseIndex.value >= activeCases.value.length - 1) {
-    if (activeTab.value === "val-m1" || activeTab.value === "val-m2") {
-      return activeJustification.value.trim().length === 0;
-    }
-    return true;
+    if (activeTab.value === "hallucination") return true;
+    return !activeValidationReady.value;
   }
-  return activeJustification.value.trim().length === 0;
+  return !activeValidationReady.value;
 });
 
 const progressPercent = computed(() => {
   const total =
-    prismCases.value.length + sfCases.value.length + filteredPairedCases.value.length;
+    prismCases.value.length +
+    sfCases.value.length +
+    filteredPairedCases.value.length +
+    pairedCases.value.length;
   if (total === 0) return 0;
   let completed = 0;
 
   for (const c of prismCases.value) {
     const entry = valModel1.value[c.id];
-    if (entry?.rating && entry.justification.trim().length > 0) completed += 1;
+    if (
+      entry?.rating &&
+      entry.styleRating &&
+      entry.correctnessJustification.trim().length > 0 &&
+      entry.styleJustification.trim().length > 0
+    ) {
+      completed += 1;
+    }
   }
   for (const c of sfCases.value) {
     const entry = valModel2.value[c.id];
-    if (entry?.rating && entry.justification.trim().length > 0) completed += 1;
+    if (
+      entry?.rating &&
+      entry.styleRating &&
+      entry.correctnessJustification.trim().length > 0 &&
+      entry.styleJustification.trim().length > 0
+    ) {
+      completed += 1;
+    }
   }
   for (const c of filteredPairedCases.value) {
     const entry = bestPick.value[c.id];
     if (entry?.selectedId && entry.justification.trim().length > 0) completed += 1;
+  }
+  for (const c of pairedCases.value) {
+    const entry = hallucinationCheck.value[c.id];
+    if (entry?.model1.type && entry?.model2.type) completed += 1;
   }
 
   return Math.round((completed / total) * 100);
@@ -144,15 +202,33 @@ const allTasksComplete = computed(() => {
 
   for (const c of prismCases.value) {
     const entry = valModel1.value[c.id];
-    if (!entry?.rating || entry.justification.trim().length === 0) return false;
+    if (
+      !entry?.rating ||
+      !entry.styleRating ||
+      entry.correctnessJustification.trim().length === 0 ||
+      entry.styleJustification.trim().length === 0
+    ) {
+      return false;
+    }
   }
   for (const c of sfCases.value) {
     const entry = valModel2.value[c.id];
-    if (!entry?.rating || entry.justification.trim().length === 0) return false;
+    if (
+      !entry?.rating ||
+      !entry.styleRating ||
+      entry.correctnessJustification.trim().length === 0 ||
+      entry.styleJustification.trim().length === 0
+    ) {
+      return false;
+    }
   }
   for (const c of filteredPairedCases.value) {
     const entry = bestPick.value[c.id];
     if (!entry?.selectedId || entry.justification.trim().length === 0) return false;
+  }
+  for (const c of pairedCases.value) {
+    const entry = hallucinationCheck.value[c.id];
+    if (!entry?.model1.type || !entry?.model2.type) return false;
   }
 
   return true;
@@ -183,6 +259,13 @@ function nextCase() {
     if (!activeCaseIdByTab.value.best && filteredPairedCases.value.length > 0) {
       activeCaseIdByTab.value.best = filteredPairedCases.value[0]?.id ?? "";
     }
+    return;
+  }
+  if (activeTab.value === "best") {
+    activeTab.value = "hallucination";
+    if (!activeCaseIdByTab.value.hallucination && pairedCases.value.length > 0) {
+      activeCaseIdByTab.value.hallucination = pairedCases.value[0]?.id ?? "";
+    }
   }
 }
 function setCase(id: string) {
@@ -194,12 +277,20 @@ function setCase(id: string) {
  * - validation for model1 and model2 stored separately
  * - best report choice stored separately
  */
-type ValidationAnnotation = { rating: Rating | null; justification: string };
+type ValidationAnnotation = {
+  rating: Rating | null;
+  correctnessJustification: string;
+  styleJustification: string;
+  styleRating: StyleRating | null;
+};
 type BestAnnotation = { selectedId: string | null; justification: string };
+type HallucinationEntry = { type: HallucinationType | null; notes: string };
+type HallucinationAnnotation = { model1: HallucinationEntry; model2: HallucinationEntry };
 
 const valModel1 = ref<Record<string, ValidationAnnotation>>({});
 const valModel2 = ref<Record<string, ValidationAnnotation>>({});
 const bestPick = ref<Record<string, BestAnnotation>>({});
+const hallucinationCheck = ref<Record<string, HallucinationAnnotation>>({});
 const STORAGE_KEY = "human-eval-state-v1";
 
 type PersistedState = {
@@ -208,13 +299,81 @@ type PersistedState = {
   valModel1: Record<string, ValidationAnnotation>;
   valModel2: Record<string, ValidationAnnotation>;
   bestPick: Record<string, BestAnnotation>;
+  hallucinationCheck: Record<string, HallucinationAnnotation>;
   autoExported: boolean;
 };
 
+function normalizeValidationState(
+  payload: Record<string, ValidationAnnotation> | undefined
+): Record<string, ValidationAnnotation> {
+  if (!payload) return {};
+  const normalized: Record<string, ValidationAnnotation> = {};
+  for (const [caseId, entry] of Object.entries(payload)) {
+    normalized[caseId] = {
+      rating: entry?.rating ?? null,
+      correctnessJustification: (entry as any)?.correctnessJustification ?? (entry as any)?.justification ?? "",
+      styleJustification: (entry as any)?.styleJustification ?? "",
+      styleRating: (entry as any)?.styleRating ?? null,
+    };
+  }
+  return normalized;
+}
+
+function normalizeHallucinationState(
+  payload: Record<string, HallucinationAnnotation> | undefined
+): Record<string, HallucinationAnnotation> {
+  if (!payload) return {};
+  const normalized: Record<string, HallucinationAnnotation> = {};
+  for (const [caseId, entry] of Object.entries(payload)) {
+    normalized[caseId] = {
+      model1: {
+        type: (entry as any)?.model1?.type ?? null,
+        notes: (entry as any)?.model1?.notes ?? "",
+      },
+      model2: {
+        type: (entry as any)?.model2?.type ?? null,
+        notes: (entry as any)?.model2?.notes ?? "",
+      },
+    };
+  }
+  return normalized;
+}
+
 function ensureCaseState(caseId: string) {
-  if (!valModel1.value[caseId]) valModel1.value[caseId] = { rating: null, justification: "" };
-  if (!valModel2.value[caseId]) valModel2.value[caseId] = { rating: null, justification: "" };
+  if (!valModel1.value[caseId]) {
+    valModel1.value[caseId] = {
+      rating: null,
+      correctnessJustification: "",
+      styleJustification: "",
+      styleRating: null,
+    };
+  }
+  if (!valModel2.value[caseId]) {
+    valModel2.value[caseId] = {
+      rating: null,
+      correctnessJustification: "",
+      styleJustification: "",
+      styleRating: null,
+    };
+  }
   if (!bestPick.value[caseId]) bestPick.value[caseId] = { selectedId: null, justification: "" };
+}
+function ensureHallucinationState(caseId: string) {
+  if (!hallucinationCheck.value[caseId]) {
+    hallucinationCheck.value[caseId] = {
+      model1: { type: null, notes: "" },
+      model2: { type: null, notes: "" },
+    };
+  }
+}
+function ensureActiveState() {
+  const id = activeCaseId.value;
+  if (!id) return;
+  if (activeTab.value === "hallucination") {
+    ensureHallucinationState(id);
+    return;
+  }
+  ensureCaseState(id);
 }
 
 function updatePrismRating(v: Rating | null) {
@@ -225,13 +384,13 @@ function updatePrismRating(v: Rating | null) {
   if (!entry) return;
   entry.rating = v;
 }
-function updatePrismJustification(v: string) {
+function updatePrismCorrectnessJustification(v: string) {
   const c = currentPrismCase.value;
   if (!c) return;
   ensureCaseState(c.id);
   const entry = valModel1.value[c.id];
   if (!entry) return;
-  entry.justification = v;
+  entry.correctnessJustification = v;
 }
 function updateSfRating(v: Rating | null) {
   const c = currentSfCase.value;
@@ -241,13 +400,61 @@ function updateSfRating(v: Rating | null) {
   if (!entry) return;
   entry.rating = v;
 }
-function updateSfJustification(v: string) {
+function updateSfCorrectnessJustification(v: string) {
   const c = currentSfCase.value;
   if (!c) return;
   ensureCaseState(c.id);
   const entry = valModel2.value[c.id];
   if (!entry) return;
-  entry.justification = v;
+  entry.correctnessJustification = v;
+}
+function updatePrismStyleJustification(v: string) {
+  const c = currentPrismCase.value;
+  if (!c) return;
+  ensureCaseState(c.id);
+  const entry = valModel1.value[c.id];
+  if (!entry) return;
+  entry.styleJustification = v;
+}
+function updateSfStyleJustification(v: string) {
+  const c = currentSfCase.value;
+  if (!c) return;
+  ensureCaseState(c.id);
+  const entry = valModel2.value[c.id];
+  if (!entry) return;
+  entry.styleJustification = v;
+}
+function updatePrismStyleRating(v: StyleRating | null) {
+  const c = currentPrismCase.value;
+  if (!c) return;
+  ensureCaseState(c.id);
+  const entry = valModel1.value[c.id];
+  if (!entry) return;
+  entry.styleRating = v;
+}
+function updateSfStyleRating(v: StyleRating | null) {
+  const c = currentSfCase.value;
+  if (!c) return;
+  ensureCaseState(c.id);
+  const entry = valModel2.value[c.id];
+  if (!entry) return;
+  entry.styleRating = v;
+}
+function updateHallucinationType(modelId: "model1" | "model2", v: HallucinationType | null) {
+  const c = currentHallucinationCase.value;
+  if (!c) return;
+  ensureHallucinationState(c.id);
+  const entry = hallucinationCheck.value[c.id];
+  if (!entry) return;
+  entry[modelId].type = v;
+}
+function updateHallucinationNotes(modelId: "model1" | "model2", v: string) {
+  const c = currentHallucinationCase.value;
+  if (!c) return;
+  ensureHallucinationState(c.id);
+  const entry = hallucinationCheck.value[c.id];
+  if (!entry) return;
+  entry[modelId].notes = v;
 }
 function updateBestSelected(v: string | null) {
   const c = currentPairCase.value;
@@ -284,6 +491,7 @@ function saveState() {
     valModel1: valModel1.value,
     valModel2: valModel2.value,
     bestPick: bestPick.value,
+    hallucinationCheck: hallucinationCheck.value,
     autoExported: autoExported.value,
   };
   try {
@@ -323,28 +531,35 @@ onMounted(() => {
 
       const saved = loadState();
       if (saved) {
-        valModel1.value = saved.valModel1 ?? {};
-        valModel2.value = saved.valModel2 ?? {};
+        valModel1.value = normalizeValidationState(saved.valModel1);
+        valModel2.value = normalizeValidationState(saved.valModel2);
         bestPick.value = saved.bestPick ?? {};
+        hallucinationCheck.value = normalizeHallucinationState(saved.hallucinationCheck);
         autoExported.value = saved.autoExported ?? false;
 
         const hasPrismId = prismCases.value.some((c) => c.id === saved.activeCaseIdByTab?.["val-m1"]);
         const hasSfId = sfCases.value.some((c) => c.id === saved.activeCaseIdByTab?.["val-m2"]);
         const hasBestId = filteredPairedCases.value.some((c) => c.id === saved.activeCaseIdByTab?.best);
+        const hasHallucinationId = pairedCases.value.some((c) => c.id === saved.activeCaseIdByTab?.hallucination);
 
         activeTab.value = saved.activeTab ?? "val-m1";
         activeCaseIdByTab.value["val-m1"] = hasPrismId ? saved.activeCaseIdByTab["val-m1"] : prismCases.value[0]?.id ?? "";
         activeCaseIdByTab.value["val-m2"] = hasSfId ? saved.activeCaseIdByTab["val-m2"] : sfCases.value[0]?.id ?? "";
         activeCaseIdByTab.value.best = hasBestId ? saved.activeCaseIdByTab.best : filteredPairedCases.value[0]?.id ?? "";
+        activeCaseIdByTab.value.hallucination = hasHallucinationId
+          ? saved.activeCaseIdByTab.hallucination
+          : pairedCases.value[0]?.id ?? "";
       } else {
         activeCaseIdByTab.value["val-m1"] = prismCases.value[0]?.id ?? "";
         activeCaseIdByTab.value["val-m2"] = sfCases.value[0]?.id ?? "";
         activeCaseIdByTab.value.best = filteredPairedCases.value[0]?.id ?? "";
+        activeCaseIdByTab.value.hallucination = pairedCases.value[0]?.id ?? "";
       }
 
       if (activeCaseIdByTab.value["val-m1"]) ensureCaseState(activeCaseIdByTab.value["val-m1"]);
       if (activeCaseIdByTab.value["val-m2"]) ensureCaseState(activeCaseIdByTab.value["val-m2"]);
       if (activeCaseIdByTab.value.best) ensureCaseState(activeCaseIdByTab.value.best);
+      if (activeCaseIdByTab.value.hallucination) ensureHallucinationState(activeCaseIdByTab.value.hallucination);
       if (allTasksComplete.value) autoExported.value = true;
     })
     .catch((err) => {
@@ -383,17 +598,31 @@ function exportJson() {
     prismCases: prismCases.value.map((c) => ({
       id: c.id,
       label: c.label,
-      validationModel1: valModel1.value[c.id] ?? { rating: null, justification: "" },
+      validationModel1: valModel1.value[c.id] ?? {
+        rating: null,
+        correctnessJustification: "",
+        styleJustification: "",
+        styleRating: null,
+      },
     })),
     sfCases: sfCases.value.map((c) => ({
       id: c.id,
       label: c.label,
-      validationModel2: valModel2.value[c.id] ?? { rating: null, justification: "" },
+      validationModel2: valModel2.value[c.id] ?? {
+        rating: null,
+        correctnessJustification: "",
+        styleJustification: "",
+        styleRating: null,
+      },
     })),
     pairedCases: pairedCases.value.map((c) => ({
       id: c.id,
       label: c.label,
       bestReport: bestPick.value[c.id] ?? { selectedId: null, justification: "" },
+      hallucinationCheck: hallucinationCheck.value[c.id] ?? {
+        model1: { type: null, notes: "" },
+        model2: { type: null, notes: "" },
+      },
     })),
   };
 
@@ -411,7 +640,7 @@ watch(allTasksComplete, (done) => {
   exportJson();
 });
 watch(
-  [valModel1, valModel2, bestPick, activeTab, activeCaseIdByTab, autoExported],
+  [valModel1, valModel2, bestPick, hallucinationCheck, activeTab, activeCaseIdByTab, autoExported],
   () => saveState(),
   { deep: true }
 );
@@ -427,6 +656,14 @@ const currentReportsForBest = computed(() => {
   ];
   return reports;
 });
+const currentReportsForHallucination = computed(() => {
+  const c = currentHallucinationCase.value;
+  if (!c) return [];
+  return [
+    { id: "model1", name: "Model 1", text: c.model1.report },
+    { id: "model2", name: "Model 2", text: c.model2.report },
+  ];
+});
 </script>
 
 <template>
@@ -436,7 +673,7 @@ const currentReportsForBest = computed(() => {
         Human Evaluation UI
       </h1>
       <p class="text-xs text-slate-500 text-center mt-1">
-        Rate each report, add a brief justification, then click Next to move to the next case. When you finish all tasks,
+        Rate each report, add brief justifications, then click Next to move to the next case. When you finish all tasks,
         download your JSON.
       </p>
     </header>
@@ -460,7 +697,7 @@ const currentReportsForBest = computed(() => {
       <div v-if="currentCase" class="h-full min-h-0 flex flex-col">
         <!-- ensure state exists -->
         <div class="hidden">
-          {{ ensureCaseState(activeCaseId) }}
+          {{ ensureActiveState() }}
         </div>
 
         <div class="flex-1 min-h-0">
@@ -473,9 +710,13 @@ const currentReportsForBest = computed(() => {
               :caseLabel="currentPrismCase?.label || ''"
               :wsiDziUrl="currentPrismCase?.model.wsiDziUrl || ''"
               :modelValueRating="valModel1[currentPrismCase?.id ?? '']?.rating ?? null"
-              :modelValueJustification="valModel1[currentPrismCase?.id ?? '']?.justification ?? ''"
+              :modelValueCorrectnessJustification="valModel1[currentPrismCase?.id ?? '']?.correctnessJustification ?? ''"
+              :modelValueStyleJustification="valModel1[currentPrismCase?.id ?? '']?.styleJustification ?? ''"
+              :modelValueStyleRating="valModel1[currentPrismCase?.id ?? '']?.styleRating ?? null"
               @update:rating="updatePrismRating"
-              @update:justification="updatePrismJustification"
+              @update:correctnessJustification="updatePrismCorrectnessJustification"
+              @update:styleJustification="updatePrismStyleJustification"
+              @update:styleRating="updatePrismStyleRating"
             />
 
             <ValidationTab
@@ -486,13 +727,17 @@ const currentReportsForBest = computed(() => {
               :caseLabel="currentSfCase?.label || ''"
               :wsiDziUrl="currentSfCase?.model.wsiDziUrl || ''"
               :modelValueRating="valModel2[currentSfCase?.id ?? '']?.rating ?? null"
-              :modelValueJustification="valModel2[currentSfCase?.id ?? '']?.justification ?? ''"
+              :modelValueCorrectnessJustification="valModel2[currentSfCase?.id ?? '']?.correctnessJustification ?? ''"
+              :modelValueStyleJustification="valModel2[currentSfCase?.id ?? '']?.styleJustification ?? ''"
+              :modelValueStyleRating="valModel2[currentSfCase?.id ?? '']?.styleRating ?? null"
               @update:rating="updateSfRating"
-              @update:justification="updateSfJustification"
+              @update:correctnessJustification="updateSfCorrectnessJustification"
+              @update:styleJustification="updateSfStyleJustification"
+              @update:styleRating="updateSfStyleRating"
             />
 
             <BestReportTab
-              v-else
+              v-else-if="activeTab === 'best'"
               :reports="currentReportsForBest"
               :caseLabel="currentPairCase?.label || ''"
               :wsiDziUrl="currentPairCase?.model1.wsiDziUrl || ''"
@@ -500,6 +745,21 @@ const currentReportsForBest = computed(() => {
               :justification="bestPick[currentPairCase?.id ?? '']?.justification ?? ''"
               @update:selectedId="updateBestSelected"
               @update:justification="updateBestJustification"
+            />
+
+            <HallucinationTab
+              v-else
+              :reports="currentReportsForHallucination"
+              :caseLabel="currentHallucinationCase?.label || ''"
+              :wsiDziUrl="currentHallucinationCase?.model1.wsiDziUrl || ''"
+              :model1Type="hallucinationCheck[currentHallucinationCase?.id ?? '']?.model1.type ?? null"
+              :model2Type="hallucinationCheck[currentHallucinationCase?.id ?? '']?.model2.type ?? null"
+              :model1Notes="hallucinationCheck[currentHallucinationCase?.id ?? '']?.model1.notes ?? ''"
+              :model2Notes="hallucinationCheck[currentHallucinationCase?.id ?? '']?.model2.notes ?? ''"
+              @update:model1Type="(v) => updateHallucinationType('model1', v)"
+              @update:model2Type="(v) => updateHallucinationType('model2', v)"
+              @update:model1Notes="(v) => updateHallucinationNotes('model1', v)"
+              @update:model2Notes="(v) => updateHallucinationNotes('model2', v)"
             />
           </Tabs>
         </div>
