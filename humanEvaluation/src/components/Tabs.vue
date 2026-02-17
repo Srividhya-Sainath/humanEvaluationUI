@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="flex flex-wrap gap-2 rounded-2xl border border-blue-200/70 bg-white/60 p-2 shadow-sm mb-4">
+  <div class="h-full min-h-0 flex flex-col">
+    <div class="flex-shrink-0 flex flex-wrap gap-2 rounded-2xl border border-blue-200/70 bg-white/60 p-2 shadow-sm mb-3">
       <button
         v-for="t in tabs"
         :key="t.id"
@@ -15,7 +15,9 @@
       </button>
     </div>
 
-    <slot />
+    <div class="flex-1 min-h-0 overflow-hidden">
+      <slot />
+    </div>
   </div>
 </template>
 

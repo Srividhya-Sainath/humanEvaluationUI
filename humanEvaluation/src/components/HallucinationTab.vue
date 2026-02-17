@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 xl:grid-cols-2 gap-3">
+  <div class="h-full min-h-0 overflow-auto grid grid-cols-1 xl:grid-cols-2 gap-3">
     <!-- Left: WSI -->
     <section class="flex flex-col min-h-0 h-full gap-2 pb-4">
       <div class="rounded-2xl border-2 border-purple-300 bg-gradient-to-br from-purple-50 via-purple-100/80 to-purple-50 p-3 text-xs text-slate-700 shadow-sm">
@@ -45,7 +45,7 @@
 
     <!-- Right -->
     <section class="flex flex-col gap-3">
-      <h3 class="text-lg font-semibold text-slate-900">Hallucination Check</h3>
+      <h3 class="text-lg font-semibold text-slate-900">LLM-as-evaluator auditing</h3>
 
       <div class="space-y-3">
         <div
