@@ -41,7 +41,7 @@
 
     <div class="min-h-0 flex flex-col gap-2">
       <section
-        class="rounded-none border p-2.5 min-h-0 flex flex-col xl:h-[280px] transition-all"
+        class="rounded-none border p-2.5 min-h-0 flex flex-col xl:h-[360px] transition-all"
         :class="sectionStateClass(true)"
       >
         <div class="flex-1 min-h-0 rounded-none border border-sky-200 bg-white overflow-hidden">
@@ -393,7 +393,7 @@ const updateAudit = <K extends keyof ReportAudit>(id: "model1" | "model2", key: 
 const ROW_CHAR_TARGET = 110;
 const rowsForReport = (text: string) => {
   const rows = Math.ceil(text.length / ROW_CHAR_TARGET);
-  return Math.min(8, Math.max(4, rows));
+  return Math.min(8, Math.max(6, rows));
 };
 </script>
 
