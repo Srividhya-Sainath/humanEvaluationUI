@@ -6,7 +6,7 @@
       "model": {
         "source_id": "BRACS_1003672",
         "report": "Benign phyllodes tumor in breast parenchyma.",
-        "answer": "IC"
+        "answer": "Tissue: Breast, Diagnosis: Pathological Benign "
       }
     },
     {
@@ -15,7 +15,7 @@
       "model": {
         "source_id": "BRACS_1274",
         "report": "Examined tissue: Benign breast parenchyma.",
-        "answer": "PC"
+        "answer": "Tissue: Breast, Diagnosis: Pathological Benign"
       }
     },
     {
@@ -24,7 +24,7 @@
       "model": {
         "source_id": "BRACS_1638",
         "report": "Metastatic melanoma in a lymph node.",
-        "answer": "IC"
+        "answer": "Tissue: Breast, Diagnosis: Invasive Carcinoma"
       }
     },
     {
@@ -33,7 +33,7 @@
       "model": {
         "source_id": "BRACS_1823",
         "report": "Invasive ductal carcinoma with perineural invasion in breast tissue.",
-        "answer": "IC"
+        "answer": "Tissue: Breast, Diagnosis: Invasive Carcinoma"
       }
     },
     {
@@ -42,7 +42,7 @@
       "model": {
         "source_id": "BRACS_1968",
         "report": "Pseudoangiomatous stromal hyperplasia in breast parenchyma.",
-        "answer": "IC"
+        "answer": "Tissue: Breast, Diagnosis: Flat Epithelial Atypia"
       }
     },
     {
@@ -51,273 +51,300 @@
       "model": {
         "source_id": "BRACS_1980",
         "report": "Examined tissue: Benign breast parenchyma.",
-        "answer": "PC"
+        "answer": "Tissue: Breast, Diagnosis: Pathological Benign"
       }
     },
     {
       "id": "mod1-007",
       "label": "Case 007",
       "model": {
-        "source_id": "C3L-00528-21",
-        "report": "High-grade glioma, WHO Grade IV in brain tissue.",
-        "answer": "PC"
+        "source_id": "BRACS_1861",
+        "report": "Atypical ductal hyperplasia in breast parenchyma.",
+        "answer": "Tissue: Breast, Diagnosis: Atypical Ductal Hyperplasia"
       }
     },
     {
       "id": "mod1-008",
       "label": "Case 008",
       "model": {
-        "source_id": "C3L-02642-25",
-        "report": "High-grade spindle cell sarcoma in dermis and subcutis.",
-        "answer": "IC"
+        "source_id": "BRACS_1476",
+        "report": "Ductal carcinoma in situ (DCIS) in breast tissue, intermediate nuclear grade.",
+        "answer": "Tissue: Breast, Diagnosis: Ductal Carcinoma In Situ"
       }
     },
     {
       "id": "mod1-009",
       "label": "Case 009",
       "model": {
-        "source_id": "C3L-02706-24",
-        "report": "High-grade B-cell lymphoma with plasmacytic differentiation in lung tissue.",
-        "answer": "IC"
+        "source_id": "BRACS_1003713",
+        "report": "Examined tissue: Benign breast parenchyma.",
+        "answer": "Tissue: Breast, Diagnosis: Normal Parenchyma"
       }
     },
     {
       "id": "mod1-010",
       "label": "Case 010",
       "model": {
-        "source_id": "C3L-02970-21",
-        "report": "High-grade glioma, WHO Grade IV; organ: brain.",
-        "answer": "PC"
+        "source_id": "BRACS_1498",
+        "report": "Benign fibrocystic changes in breast parenchyma with ductal hyperplasia.",
+        "answer": "Tissue: Breast, Diagnosis: Usual Ductal Hyperplasia"
       }
     },
     {
       "id": "mod1-011",
       "label": "Case 011",
       "model": {
-        "source_id": "C3L-03372-24",
-        "report": "High-grade spindle cell sarcoma of unspecified organ.",
-        "answer": "IC"
+        "source_id": "BRACS_1003684",
+        "report": "Poorly differentiated invasive ductal carcinoma in breast tissue.",
+        "answer": "Tissue: Breast, Diagnosis: Invasive Carcinoma"
       }
     },
     {
       "id": "mod1-012",
       "label": "Case 012",
       "model": {
-        "source_id": "C3N-03186-23",
-        "report": "High-grade spindle cell neoplasm, likely glioblastoma WHO Grade IV.",
-        "answer": "PC"
+        "source_id": "BRACS_1003692",
+        "report": "Moderately differentiated invasive ductal carcinoma with DCIS in breast tissue.",
+        "answer": "Tissue: Breast, Diagnosis: Invasive Carcinoma"
       }
     },
     {
       "id": "mod1-013",
       "label": "Case 013",
       "model": {
-        "source_id": "C3L-00987-27",
-        "report": "Examined tissue: Benign skeletal muscle and fibrous tissue.",
-        "answer": "IC"
+        "source_id": "BRACS_1003699",
+        "report": "Well-differentiated invasive ductal carcinoma in breast tissue.",
+        "answer": "Tissue: Breast, Diagnosis: Invasive Carcinoma"
       }
     },
     {
       "id": "mod1-014",
       "label": "Case 014",
       "model": {
-        "source_id": "C3L-03378-24",
-        "report": "Moderately differentiated invasive squamous cell carcinoma with perineural invasion.",
-        "answer": "PC"
+        "source_id": "BRACS_1003706",
+        "report": "Benign fibroadenoma in breast parenchyma.",
+        "answer": "Tissue: Breast, Diagnosis: Pathological Benign"
       }
     },
     {
       "id": "mod1-015",
       "label": "Case 015",
       "model": {
-        "source_id": "C3N-03011-24",
-        "report": "Ulcerated squamous cell carcinoma; organ: skin.",
-        "answer": "IC"
+        "source_id": "C3L-00528-21",
+        "report": "High-grade glioma, WHO Grade IV in brain tissue.",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
       }
     },
     {
       "id": "mod1-016",
       "label": "Case 016",
       "model": {
-        "source_id": "C3N-03849-22",
-        "report": "Moderately differentiated invasive squamous cell carcinoma.",
-        "answer": "PC"
+        "source_id": "C3L-02642-25",
+        "report": "High-grade spindle cell sarcoma in dermis and subcutis.",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
       }
     },
     {
       "id": "mod1-017",
       "label": "Case 017",
       "model": {
-        "source_id": "C3N-03226-21",
-        "report": "Moderately differentiated invasive squamous cell carcinoma with perineural invasion.",
-        "answer": "PC"
+        "source_id": "C3L-02706-24",
+        "report": "High-grade B-cell lymphoma with plasmacytic differentiation in lung tissue.",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
       }
     },
     {
       "id": "mod1-018",
       "label": "Case 018",
       "model": {
-        "source_id": "C3N-03458-21",
-        "report": "Examined tissue shows in situ squamous cell carcinoma.",
-        "answer": "IC"
+        "source_id": "C3L-02970-21",
+        "report": "High-grade glioma, WHO Grade IV; organ: brain.",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
       }
     },
     {
       "id": "mod1-019",
       "label": "Case 019",
       "model": {
-        "source_id": "C3L-00369-23",
-        "report": "Metastatic clear cell renal cell carcinoma in examined tissue.",
-        "answer": "PC"
+        "source_id": "C3L-03372-24",
+        "report": "High-grade spindle cell sarcoma of unspecified organ.",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
       }
     },
     {
       "id": "mod1-020",
       "label": "Case 020",
       "model": {
-        "source_id": "C3L-00907-23",
-        "report": "Metastatic clear cell renal cell carcinoma in examined tissue.",
-        "answer": "PC"
+        "source_id": "C3N-03186-23",
+        "report": "High-grade spindle cell neoplasm, likely glioblastoma WHO Grade IV.",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
       }
     },
     {
       "id": "mod1-021",
       "label": "Case 021",
       "model": {
-        "source_id": "C3L-01836-26",
-        "report": "Examined tissue: Benign pancreatic tissue.",
-        "answer": "IC"
+        "source_id": "C3L-00369-23",
+        "report": "Metastatic clear cell renal cell carcinoma in examined tissue.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
       }
     },
     {
       "id": "mod1-022",
       "label": "Case 022",
       "model": {
-        "source_id": "C3L-01955-22",
-        "report": "Examined tissue: Benign parathyroid gland.",
-        "answer": "IC"
+        "source_id": "C3L-00907-23",
+        "report": "Metastatic clear cell renal cell carcinoma in examined tissue.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
       }
     },
     {
       "id": "mod1-023",
       "label": "Case 023",
       "model": {
-        "source_id": "C3L-02204-21",
-        "report": "Pancreatic tail harbors a well-differentiated neuroendocrine tumor.",
-        "answer": "IC"
+        "source_id": "C3L-01836-26",
+        "report": "Examined tissue: Benign pancreatic tissue.",
+        "answer": "Tissue: Kidney, Diagnosis: Non-tumor renal parenchyma"
       }
     },
     {
       "id": "mod1-024",
       "label": "Case 024",
       "model": {
-        "source_id": "C3N-01806-21",
-        "report": "Malignant epithelioid neoplasm, likely renal cell carcinoma, PAX8 positive.",
-        "answer": "PC"
+        "source_id": "C3L-01955-22",
+        "report": "Examined tissue: Benign parathyroid gland.",
+        "answer": "Tissue: Kidney, Diagnosis: Non-tumor renal parenchyma"
       }
     },
     {
       "id": "mod1-025",
       "label": "Case 025",
       "model": {
-        "source_id": "C3N-02763-21",
-        "report": "Metastatic clear cell renal cell carcinoma in examined tissue.",
-        "answer": "PC"
+        "source_id": "C3L-02204-21",
+        "report": "Pancreatic tail harbors a well-differentiated neuroendocrine tumor.",
+        "answer": "Tissue: Kidney, Diagnosis: Oncocytoma"
       }
     },
     {
       "id": "mod1-026",
       "label": "Case 026",
       "model": {
-        "source_id": "C3L-00004-21",
-        "report": "Metastatic clear cell renal cell carcinoma in examined tissue.",
-        "answer": "PC"
+        "source_id": "C3N-01806-21",
+        "report": "Malignant epithelioid neoplasm, likely renal cell carcinoma, PAX8 positive.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
       }
     },
     {
       "id": "mod1-027",
       "label": "Case 027",
       "model": {
-        "source_id": "C3L-00088-22",
-        "report": "Metastatic leiomyosarcoma in examined tissue.",
-        "answer": "IC"
+        "source_id": "C3N-02763-21",
+        "report": "Metastatic clear cell renal cell carcinoma in examined tissue.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
       }
     },
     {
       "id": "mod1-028",
       "label": "Case 028",
       "model": {
-        "source_id": "C3L-00604-26",
-        "report": "Benign lung parenchyma, no tumor present.",
-        "answer": "TC"
+        "source_id": "C3L-00004-21",
+        "report": "Metastatic clear cell renal cell carcinoma in examined tissue.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
       }
     },
     {
       "id": "mod1-029",
       "label": "Case 029",
       "model": {
-        "source_id": "C3L-02349-21",
-        "report": "Non-keratinizing squamous cell carcinoma of the lung.",
-        "answer": "TC"
+        "source_id": "C3L-00088-22",
+        "report": "Metastatic leiomyosarcoma in examined tissue.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
       }
     },
     {
       "id": "mod1-030",
       "label": "Case 030",
       "model": {
-        "source_id": "C3L-02619-26",
-        "report": "Moderately differentiated invasive squamous cell carcinoma in right lower lobe lung.",
-        "answer": "IC"
+        "source_id": "C3L-01929-22",
+        "report": "Benign adipose tissue, no tumor present.",
+        "answer": "Tissue: Kidney, Diagnosis: Non-tumor renal parenchyma"
       }
     },
     {
       "id": "mod1-031",
       "label": "Case 031",
       "model": {
-        "source_id": "C3L-02957-23",
-        "report": "Poorly differentiated large cell neuroendocrine carcinoma of the lung.",
-        "answer": "IC"
+        "source_id": "C3L-00604-26",
+        "report": "Benign lung parenchyma, no tumor present.",
+        "answer": "Tissue: Lung, Diagnosis: Non-tumor lung parenchyma"
       }
     },
     {
       "id": "mod1-032",
       "label": "Case 032",
       "model": {
-        "source_id": "C3L-03969-25",
-        "report": "Poorly differentiated adenocarcinoma with signet ring features in the examined tissue.",
-        "answer": "PC"
+        "source_id": "C3L-02349-21",
+        "report": "Non-keratinizing squamous cell carcinoma of the lung.",
+        "answer": "Tissue: Lung, Diagnosis: Squamous Cell Carcinoma"
       }
     },
     {
       "id": "mod1-033",
       "label": "Case 033",
       "model": {
-        "source_id": "C3L-03985-25",
-        "report": "Adenocarcinoma with mucinous features in lung tissue.",
-        "answer": "PC"
+        "source_id": "C3L-02619-26",
+        "report": "Moderately differentiated invasive squamous cell carcinoma in right lower lobe lung.",
+        "answer": "Tissue: Lung, Diagnosis: Non-tumor lung parenchyma"
       }
     },
     {
       "id": "mod1-034",
       "label": "Case 034",
       "model": {
-        "source_id": "C3L-04404-21",
-        "report": "Moderately differentiated invasive squamous cell carcinoma.",
-        "answer": "PC"
+        "source_id": "C3L-02957-23",
+        "report": "Poorly differentiated large cell neuroendocrine carcinoma of the lung.",
+        "answer": "Tissue: Lung, Diagonsis: Acinar adenocarcinoma"
       }
     },
     {
       "id": "mod1-035",
       "label": "Case 035",
       "model": {
-        "source_id": "C3N-03054-22",
-        "report": "Adenocarcinoma with acinar pattern in lung; TTF-1 positive.",
-        "answer": "TC"
+        "source_id": "C3L-03969-25",
+        "report": "Poorly differentiated adenocarcinoma with signet ring features in the examined tissue.",
+        "answer": "Tissue: Lung, Diagnosis: Adenocarcinoma"
       }
     },
     {
       "id": "mod1-036",
       "label": "Case 036",
+      "model": {
+        "source_id": "C3L-03985-25",
+        "report": "Adenocarcinoma with mucinous features in lung tissue.",
+        "answer": "Tissue: Lung, Diagnosis: Colloid adenocarcinoma"
+      }
+    },
+    {
+      "id": "mod1-037",
+      "label": "Case 037",
+      "model": {
+        "source_id": "C3L-04404-21",
+        "report": "Moderately differentiated invasive squamous cell carcinoma.",
+        "answer": "Tissue: Lung, Diagnosis: Keratinizing squamous cell carcinoma"
+      }
+    },
+    {
+      "id": "mod1-038",
+      "label": "Case 038",
+      "model": {
+        "source_id": "C3N-03054-22",
+        "report": "Adenocarcinoma with acinar pattern in lung; TTF-1 positive.",
+        "answer": "Tissue: Lung, Diagnosis: Adenocarcinoma"
+      }
+    },
+    {
+      "id": "mod1-039",
+      "label": "Case 039",
       "model": {
         "source_id": "C3L-00401-22",
         "report": "Moderately to poorly differentiated invasive adenocarcinoma",
@@ -325,8 +352,8 @@
       }
     },
     {
-      "id": "mod1-037",
-      "label": "Case 037",
+      "id": "mod1-040",
+      "label": "Case 040",
       "model": {
         "source_id": "C3L-02463-24",
         "report": "Examined tissue: Benign small bowel mucosa",
@@ -334,8 +361,8 @@
       }
     },
     {
-      "id": "mod1-038",
-      "label": "Case 038",
+      "id": "mod1-041",
+      "label": "Case 041",
       "model": {
         "source_id": "C3L-02613-21",
         "report": "High-grade invasive urothelial carcinoma with squamous differentiation in the bladder",
@@ -343,8 +370,8 @@
       }
     },
     {
-      "id": "mod1-039",
-      "label": "Case 039",
+      "id": "mod1-042",
+      "label": "Case 042",
       "model": {
         "source_id": "C3L-04473-24",
         "report": "Examined tissue: Benign pancreatic parenchyma",
@@ -352,8 +379,8 @@
       }
     },
     {
-      "id": "mod1-040",
-      "label": "Case 040",
+      "id": "mod1-043",
+      "label": "Case 043",
       "model": {
         "source_id": "C3N-01714-21",
         "report": "Moderately differentiated invasive adenocarcinoma of the pancreas",
@@ -361,8 +388,8 @@
       }
     },
     {
-      "id": "mod1-041",
-      "label": "Case 041",
+      "id": "mod1-044",
+      "label": "Case 044",
       "model": {
         "source_id": "3c0e4614fe9fc45936749d12d29bb127",
         "report": "Prostatic adenocarcinoma, Gleason score 7, Grade Group 2.",
@@ -370,8 +397,8 @@
       }
     },
     {
-      "id": "mod1-042",
-      "label": "Case 042",
+      "id": "mod1-045",
+      "label": "Case 045",
       "model": {
         "source_id": "771b4d1f002ddd740017d6e4371df8d0",
         "report": "Prostatic adenocarcinoma, Gleason score 7, Grade Group 2.",
@@ -379,8 +406,8 @@
       }
     },
     {
-      "id": "mod1-043",
-      "label": "Case 043",
+      "id": "mod1-046",
+      "label": "Case 046",
       "model": {
         "source_id": "a295d73e91c9f8d8d16a8c1a3469714a",
         "report": "High-grade prostatic intraepithelial neoplasia in examined tissue.",
@@ -388,8 +415,8 @@
       }
     },
     {
-      "id": "mod1-044",
-      "label": "Case 044",
+      "id": "mod1-047",
+      "label": "Case 047",
       "model": {
         "source_id": "bedeb6cf82f3257a34cfdad3dba80413",
         "report": "</s>Prostatic adenocarcinoma identified, Gleason score 9, with perineural invasion.",
@@ -397,8 +424,8 @@
       }
     },
     {
-      "id": "mod1-045",
-      "label": "Case 045",
+      "id": "mod1-048",
+      "label": "Case 048",
       "model": {
         "source_id": "c9bcd1d4867a43cec02af7f3b555709f",
         "report": "Moderately differentiated invasive adenocarcinoma of the prostate.",
@@ -406,8 +433,8 @@
       }
     },
     {
-      "id": "mod1-046",
-      "label": "Case 046",
+      "id": "mod1-049",
+      "label": "Case 049",
       "model": {
         "source_id": "e19325ebb64adc3293f7173d7a337409",
         "report": "Benign prostatic tissue.",
@@ -415,8 +442,8 @@
       }
     },
     {
-      "id": "mod1-047",
-      "label": "Case 047",
+      "id": "mod1-050",
+      "label": "Case 050",
       "model": {
         "source_id": "C3L-00356-22",
         "report": "Metastatic high-grade serous carcinoma in lung tissue.",
@@ -424,8 +451,8 @@
       }
     },
     {
-      "id": "mod1-048",
-      "label": "Case 048",
+      "id": "mod1-051",
+      "label": "Case 051",
       "model": {
         "source_id": "C3L-01355-22",
         "report": "FIGO Grade 1 endometrioid adenocarcinoma of the uterus.",
@@ -433,8 +460,8 @@
       }
     },
     {
-      "id": "mod1-049",
-      "label": "Case 049",
+      "id": "mod1-052",
+      "label": "Case 052",
       "model": {
         "source_id": "C3L-02125-27",
         "report": "High-grade invasive urothelial carcinoma, organ: bladder.",
@@ -442,8 +469,8 @@
       }
     },
     {
-      "id": "mod1-050",
-      "label": "Case 050",
+      "id": "mod1-053",
+      "label": "Case 053",
       "model": {
         "source_id": "C3L-02389-22",
         "report": "Myometrium with leiomyomata and adenomyosis; organ: uterus.",
@@ -451,8 +478,8 @@
       }
     },
     {
-      "id": "mod1-051",
-      "label": "Case 051",
+      "id": "mod1-054",
+      "label": "Case 054",
       "model": {
         "source_id": "C3L-03143-21",
         "report": "High-grade serous carcinoma of the ovary.",
@@ -460,13 +487,148 @@
       }
     },
     {
-      "id": "mod1-052",
-      "label": "Case 052",
+      "id": "mod1-055",
+      "label": "Case 055",
       "model": {
         "source_id": "C3N-01879-21",
         "report": "Examined tissue: Endometrium with FIGO Grade 1 endometrioid adenocarcinoma.",
         "answer": "TC"
       }
+    },
+    {
+      "id": "mod1-056",
+      "label": "Case 056",
+      "model": {
+        "source_id": "C3N-04691-21",
+        "report": "Granulation tissue with fibrinopurulent exudate; organ: unspecified.",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
+      }
+    },
+    {
+      "model": {
+        "source_id": "C3L-00446-22",
+        "report": "High-grade invasive urothelial carcinoma with sarcomatoid features; organ: bladder. ",
+        "answer": ""
+      },
+      "id": "mod1-057",
+      "label": "Case 057"
+    },
+    {
+      "model": {
+        "source_id": "C3L-01461-21",
+        "report": "Pancreatic neuroendocrine tumor, well-differentiated, with chromogranin and synaptophysin positivity.",
+        "answer": "Tissue: Kidney, Diagnosis: Oncocytoma"
+      },
+      "id": "mod1-058",
+      "label": "Case 058"
+    },
+    {
+      "model": {
+        "source_id": "C3L-01553-22",
+        "report": "Examined tissue: Benign fibroadipose without malignancy.",
+        "answer": "Tissue: Kidney, Diagnosis: Non-tumor renal parenchyma"
+      },
+      "id": "mod1-059",
+      "label": "Case 059"
+    },
+    {
+      "model": {
+        "source_id": "C3L-02346-21",
+        "report": "High-grade epithelioid neoplasm, likely renal cell carcinoma, PAX8 positive.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
+      },
+      "id": "mod1-060",
+      "label": "Case 060"
+    },
+    {
+      "model": {
+        "source_id": "C3L-03678-21",
+        "report": "Examined tissue: Benign lung parenchyma with acute and chronic inflammation. ",
+        "answer": ""
+      },
+      "id": "mod1-061",
+      "label": "Case 061"
+    },
+    {
+      "model": {
+        "source_id": "C3L-03963-25",
+        "report": "High-grade invasive urothelial carcinoma with perineural invasion. ",
+        "answer": ""
+      },
+      "id": "mod1-062",
+      "label": "Case 062"
+    },
+    {
+      "model": {
+        "source_id": "C3L-04365-22",
+        "report": "Granulation tissue with bacterial colonies; organ: not specified. ",
+        "answer": ""
+      },
+      "id": "mod1-063",
+      "label": "Case 063"
+    },
+    {
+      "model": {
+        "source_id": "C3N-00247-21",
+        "report": "High-grade sarcomatoid carcinoma in ulcerated granulation tissue. ",
+        "answer": ""
+      },
+      "id": "mod1-064",
+      "label": "Case 064"
+    },
+    {
+      "model": {
+        "source_id": "C3N-00492-23",
+        "report": "Necrotic debris and bacterial colonies in examined tissue.",
+        "answer": ""
+      },
+      "id": "mod1-065",
+      "label": "Case 065"
+    },
+    {
+      "model": {
+        "source_id": "C3N-01177-24",
+        "report": "Metastatic gastrointestinal stromal tumor in liver; positive for CD117, DOG1.",
+        "answer": ""
+      },
+      "id": "mod1-066",
+      "label": "Case 066"
+    },
+    {
+      "model": {
+        "source_id": "C3N-01904-24",
+        "report": "High-grade spindle cell sarcoma of unspecified organ.",
+        "answer": ""
+      },
+      "id": "mod1-067",
+      "label": "Case 067"
+    },
+    {
+      "model": {
+        "source_id": "C3N-02145-27",
+        "report": "Benign lung parenchyma with focal organizing pneumonia. ",
+        "answer": ""
+      },
+      "id": "mod1-068",
+      "label": "Case 068"
+    },
+    {
+      "model": {
+        "source_id": "C3N-03205-23",
+        "report": "Benign lung parenchyma, no tumor present. ",
+        "answer": ""
+      },
+      "id": "mod1-069",
+      "label": "Case 069"
+    },
+    {
+      "model": {
+        "source_id": "C3N-04609-22",
+        "report": "Malignant melanoma in lung; SOX10 and HMB45 positive. ",
+        "answer": ""
+      },
+      "id": "mod1-070",
+      "label": "Case 070"
     }
   ],
   "mod2": [
@@ -475,8 +637,8 @@
       "label": "Case 001",
       "model": {
         "source_id": "BRACS_1003672",
-        "report": "The microscopic examination of the specimen has yielded a diagnosis of invasive ductal carcinoma, no special type, which exhibits a histologic grade of 1 and a nuclear grade of 2. This malignant tumor is found to involve multiple anatomical sites, including the lower inner quadrant, the central area, and the retroareolar region, with evidence of focal lymphovascular invasion.\nThe tumor is observed to be present at the anterior margin of the specimen. In addition to the invasive component, lobular carcinoma in situ of the classical type is identified, which is present in both the in situ and invasive areas.\nThe surrounding non-neoplastic breast tissue demonstrates changes consistent with a prior biopsy, as well as fibrocystic changes.\nUpon examination of the lymph nodes, metastatic carcinoma is detected in three out of twenty-one nodes, with evidence of extranodal extension, underscoring the spread of the disease.\nImmunohistochemical analysis reveals that the tumor is positive for estrogen receptor and progesterone receptor, while negative for HER2.",
-        "answer": "IC"
+        "report": "The slide shows a proliferation of tightly packed small acini and tubules lined by a single layer of relatively uniform cuboidal to columnar epithelial cells with minimal nuclear pleomorphism and low mitotic activity, embedded in a fibrous stroma.",
+        "answer": "Tissue: Breast, Diagnosis: Pathological Benign "
       }
     },
     {
@@ -484,8 +646,8 @@
       "label": "Case 002",
       "model": {
         "source_id": "BRACS_1274",
-        "report": "Microscopic examination reveals mammary tissue with features of atrophy, characterized by a decrease in the amount of glandular tissue and an increase in stromal elements.\nThe remaining glandular structures appear shrunken and compressed, and the overall architecture of the breast tissue shows a reduction in the number of acini.\nThere is a relative increase in fibrous and fatty tissue, consistent with a diagnosis of mammary tissue atrophy.",
-        "answer": "PC"
+        "report": "The slide shows dense collagenous fibrosis forming broad eosinophilic bands that replace the normal lobular architecture; scattered residual ducts and lobular units are present, lined by a single layer of cuboidal to flattened epithelium and containing scant eosinophilic secretions, and the fibrous stroma is interspersed with scattered chronic inflammatory cells.",
+        "answer": "Tissue: Breast, Diagnosis: Pathological Benign"
       }
     },
     {
@@ -493,8 +655,8 @@
       "label": "Case 003",
       "model": {
         "source_id": "BRACS_1638",
-        "report": "The histopathological examination of the breast tissue specimen reveals the presence of an invasive ductal carcinoma, which exhibits a histologic grade III, characterized by a notable absence or scarcity of tubule formation, coupled with a pronounced variability in the size and shape of the nuclei.\nThis invasive carcinoma is accompanied by a pronounced lymphocytic infiltrate and is associated with calcifications, as well as focal ductal carcinoma in-situ of the solid type, which displays a high nuclear grade and extensive necrosis.\nThe invasive carcinoma involves the nipple-areolar complex, with focal involvement of the surgical margin by invasive carcinoma, and there is no evidence of vascular invasion.\nMetastatic carcinoma is identified in one out of four lymph nodes sampled from the level I neck region, whereas the remaining lymph nodes from levels II and III are devoid of metastatic disease.\nThe non-neoplastic breast tissue exhibits changes consistent with fibrocystic disease and focal atypical ductal hyperplasia.\nIn summary, the diagnosis confirmed is invasive ductal carcinoma of the right breast, complicated by metastasis to a single lymph node.",
-        "answer": "TC"
+        "report": "The slide shows invasive ductal carcinoma composed of predominantly solid nests and cords with only focal tubule formation, marked nuclear pleomorphism and hyperchromasia, and increased mitotic activity, consistent with high histologic grade. Foci of ductal carcinoma in situ with solid and cribriform architecture and intermediate-grade nuclei are present, with calcifications identified in benign ducts.",
+        "answer": "Tissue: Breast, Diagnosis: Invasive Carcinoma"
       }
     },
     {
@@ -502,8 +664,8 @@
       "label": "Case 004",
       "model": {
         "source_id": "BRACS_1823",
-        "report": "The histopathological examination of the breast tissue specimen has yielded a diagnosis of invasive ductal carcinoma, which exhibits an SBR grade of II. This invasive carcinoma is accompanied by scattered foci of ductal carcinoma in situ, characterized by a solid and cribriform architectural pattern, with a high nuclear grade and evidence of central necrosis. The invasive carcinoma component is observed to be situated in close proximity to the anterior-superior margin of the specimen, while the ductal carcinoma in situ is found to be present in close proximity to both the anterior and posterior margins, and calcifications are detected within both the in situ and invasive components. No evidence of vascular invasion is detected, and the nipple-areolar complex is found to be unremarkable. The lymph node assessment reveals metastatic carcinoma in one out of four lymph nodes examined, although there is no evidence of extranodal extension of the carcinoma. In summary, the diagnosis is confirmed as invasive ductal carcinoma with lymph node metastasis.",
-        "answer": "TC"
+        "report": "Breast parenchyma is infiltrated by invasive ductal carcinoma composed of irregular nests and cords with focal tubule formation in a desmoplastic stroma, with moderate nuclear pleomorphism and low mitotic activity. Associated ductal carcinoma in situ is present with solid and cribriform architecture, intermediate-to-high nuclear grade, comedo-type necrosis, and calcifications.",
+        "answer": "Tissue: Breast, Diagnosis: Invasive Carcinoma"
       }
     },
     {
@@ -511,8 +673,8 @@
       "label": "Case 005",
       "model": {
         "source_id": "BRACS_1968",
-        "report": "Microscopic examination reveals calcification within mammary tissue, characterized by the presence of calcium deposits. The calcification is associated with benign breast tissue, including fibroadipose tissue and skeletal muscle. The morphology is consistent with benign calcification in the breast.",
-        "answer": "IC"
+        "report": "Fibrocystic change with numerous dilated cystic spaces lined by a single layer of flattened to cuboidal epithelium and surrounded by dense collagenous stroma; the surrounding ducts and lobules show preserved architecture.",
+        "answer": "Tissue: Breast, Diagnosis: Flat Epithelial Atypia"
       }
     },
     {
@@ -520,277 +682,277 @@
       "label": "Case 006",
       "model": {
         "source_id": "BRACS_1980",
-        "report": "Microscopic examination reveals mammary tissue with calcifications and lesions of fibrocystic change, characterized by the presence of calcifications within ducts and lobules, indicating a benign proliferative process. The fibrocystic changes are consistent with a history of mammary tissue injury or inflammation. The presence of calcifications suggests a chronic or long-standing process. The morphology is consistent with fibrocystic changes and calcifications in the breast tissue.",
-        "answer": "PC"
+        "report": "The slide shows focal basophilic, granular calcific deposits within the fibrous stroma in a sclerotic pattern, associated with dense collagenous fibrosis and scattered atrophic ductal and lobular structures exhibiting a sclerotic, distorted architecture.",
+        "answer": "Tissue: Breast, Diagnosis: Pathological Benign"
       }
     },
     {
       "id": "mod2-007",
       "label": "Case 007",
       "model": {
-        "source_id": "C3L-00528-21",
-        "report": "Upon thorough microscopic examination, the specimen is noted to exhibit the hallmark features of a high-grade glioma, specifically demonstrating a pronounced degree of hypercellularity and cellular pleomorphism, alongside the presence of mitotic figures and notable microvascular endothelial hyperplasia. Additionally, fragments of necrotic tissue are identified, further contributing to the overall malignant appearance. Notably, immunohistochemical assessment reveals that the tumor cells display an MIB-1 labeling index of approximately 10%, a finding that correlates with a high proliferative activity. In aggregate, these microscopic findings are entirely consistent with a definitive diagnosis of glioblastoma, a conclusion drawn from the comprehensive evaluation of the histological and immunohistochemical characteristics presented.",
-        "answer": "PC"
+        "source_id": "BRACS_1861",
+        "report": "The slide shows multiple cystic spaces within a fibrous stroma; each cyst is lined by a single layer of flattened to cuboidal epithelial cells and the surrounding stroma is expanded by dense collagenous fibrosis.",
+        "answer": "Tissue: Breast, Diagnosis: Atypical Ductal Hyperplasia"
       }
     },
     {
       "id": "mod2-008",
       "label": "Case 008",
       "model": {
-        "source_id": "C3L-02642-25",
-        "report": "The microscopic examination of the specimen has uncovered a neoplastic process characterized by the proliferation of glial cells, which extensively infiltrates the brain tissue and in certain areas, results in the effacement of the normal brain architecture. Notably, the neoplastic cells exhibit marked nuclear pleomorphism and anaplasia, with the presence of frequent multinucleated cells. Furthermore, mitotic activity is evident, and there is focal prominence of microvascular cellular proliferation, although necrosis is not a feature of this lesion. Upon closer inspection, certain areas of the tumor appear to retain characteristics suggestive of an oligodendroglial component, contributing to an overall diagnosis of a high-grade glioma. To further support this diagnosis, immunohistochemical staining was performed, revealing focal positivity for MIB-1, a marker of cellular proliferation, which corresponds to a labeling index of approximately 10% in the most active regions of the tumor. Based on these findings, the diagnosis of glioblastoma multiforme is confirmed.",
-        "answer": "IC"
+        "source_id": "BRACS_1476",
+        "report": "The slide shows a proliferation of epithelial cells forming multiple ductal / tubular structures embedded in a dense fibrous stroma, with moderate nuclear pleomorphism and retained ductal architecture; a focus of high \u2011 grade ductal carcinoma in situ is present, displaying solid and cribriform epithelial proliferations with comedo \u2011 type necrosis and calcifications.",
+        "answer": "Tissue: Breast, Diagnosis: Ductal Carcinoma In Situ"
       }
     },
     {
       "id": "mod2-009",
       "label": "Case 009",
       "model": {
-        "source_id": "C3L-02706-24",
-        "report": "Microscopic examination reveals a high-grade glioma characterized by hypercellularity, frequent mitotic figures, vascular hyperplasia, and large areas of necrosis. The tumor cells exhibit a high proliferative index, as evidenced by an MIB-1 labeling index of about 25%. These features are consistent with a diagnosis of glioblastoma multiforme.",
-        "answer": "IC"
+        "source_id": "BRACS_1003713",
+        "report": "The slide demonstrates dense collagenous fibrous stroma interspersed with numerous terminal ductal lobular units; the ducts are lined by a single layer of cuboidal epithelial cells and contain small lumina containing scant colloid, and the stromal component shows low cellularity with evenly dispersed fibroblasts.",
+        "answer": "Tissue: Breast, Diagnosis: Normal Parenchyma"
       }
     },
     {
       "id": "mod2-010",
       "label": "Case 010",
       "model": {
-        "source_id": "C3L-02970-21",
-        "report": "Microscopic examination reveals a neoplasm with extensive areas of necrosis, a delicate vascular network, and pleomorphic and hyperchromatic nuclei, indicating a high degree of malignancy. The tumor is moderately cellular and exhibits pseudopallisading around necrotic areas, with mitotic figures and frequent gemistocytes observed. Perivascular lymphocytic infiltrate and vascular thrombosis are also noted. Prominent microvessels are present, although microvascular cellular proliferation is not prominent. An immunoperoxidase stain with MIB-1 antiserum yields a labelling index of about 10% in the more active areas, further supporting the aggressive nature of the tumor. The diagnosis is glioblastoma multiforme.",
-        "answer": "PC"
+        "source_id": "BRACS_1498",
+        "report": "Fibrocystic change with numerous dilated cystic spaces lined by flattened to cuboidal epithelium is present; the surrounding parenchyma contains ductal carcinoma in situ displaying a solid, cribriform, and micropapillary architectural pattern with central comedo-type necrosis and associated calcifications.",
+        "answer": "Tissue: Breast, Diagnosis: Usual Ductal Hyperplasia"
       }
     },
     {
       "id": "mod2-011",
       "label": "Case 011",
       "model": {
-        "source_id": "C3L-03372-24",
-        "report": "The histopathological examination of the specimen reveals a neoplastic process characterized by the proliferation of glial cells, which extensively infiltrates the brain tissue and in certain areas, results in the effacement of the normal brain architecture. Notably, the neoplastic cells exhibit marked nuclear pleomorphism and anaplasia, with the presence of frequent multinucleated cells. Furthermore, mitotic activity is observed, and there is focal prominence of microvascular cellular proliferation, although necrosis is not a feature of this lesion. Upon closer examination, certain areas of the tumor appear to retain characteristics suggestive of an oligodendroglial component, contributing to an overall diagnosis of a high-grade glioma. To further support this diagnosis, immunohistochemical staining with MIB-1 was performed, yielding a proliferation index of 21% in the most active regions of the tumor, thereby confirming the high histological grade of this glioma. Based on these findings, the diagnosis of glioblastoma multiforme is rendered.",
-        "answer": "IC"
+        "source_id": "BRACS_1003684",
+        "report": "The slide shows invasive ductal carcinoma composed predominantly of solid nests and irregular cords with minimal tubule formation, marked nuclear pleomorphism, hyperchromasia, and increased mitotic activity, indicating high-grade morphology. Adjacent ducts demonstrate high-grade ductal carcinoma in situ with solid and cribriform architecture, comedo-type necrosis, and calcifications.",
+        "answer": "Tissue: Breast, Diagnosis: Invasive Carcinoma"
       }
     },
     {
       "id": "mod2-012",
       "label": "Case 012",
       "model": {
-        "source_id": "C3N-03186-23",
-        "report": "Microscopic examination reveals a brain tumor with features of glioblastoma multiforme, characterized by vascular proliferation and pseudopalisading necrosis. The tumor cells exhibit a high degree of proliferation, as evidenced by an MIB-1 labeling index of about 10%.",
-        "answer": "PC"
+        "source_id": "BRACS_1003692",
+        "report": "Breast tissue shows invasive ductal carcinoma, no special type, composed of predominantly solid nests and cords with minimal tubule formation, marked nuclear pleomorphism, and low mitotic activity, consistent with Nottingham grade 3. Associated ductal carcinoma in situ is present with solid, cribriform, and micropapillary architecture, intermediate-grade nuclei, and comedo-type necrosis with calcifications.",
+        "answer": "Tissue: Breast, Diagnosis: Invasive Carcinoma"
       }
     },
     {
       "id": "mod2-013",
       "label": "Case 013",
       "model": {
-        "source_id": "C3L-00987-27",
-        "report": "Microscopic examination reveals no abnormality in the minor salivary gland. The morphology is unremarkable, with no notable findings or changes. The diagnosis is no abnormality of the minor salivary gland.",
-        "answer": "IC"
+        "source_id": "BRACS_1003699",
+        "report": "Breast tissue shows invasive ductal carcinoma, no special type, composed of irregular infiltrative nests and cords with focal tubule formation, marked nuclear pleomorphism, and increased mitotic activity (Nottingham grade II). Associated ductal carcinoma in situ is present with cribriform architecture, intermediate-to-high nuclear grade, comedo-type necrosis, and microcalcifications.",
+        "answer": "Tissue: Breast, Diagnosis: Invasive Carcinoma"
       }
     },
     {
       "id": "mod2-014",
       "label": "Case 014",
       "model": {
-        "source_id": "C3L-03378-24",
-        "report": "The histopathological examination of the specimen from the right tongue demonstrates a malignant neoplasm consistent with a moderately to poorly differentiated squamous cell carcinoma. The tumor shows evidence of vascular invasion, indicating aggressive biological behavior. Evaluation of the resection margins reveals that the deep margin, as well as the medial, lateral, and posterior margins, are free of carcinomatous involvement, consistent with complete surgical excision. Examination of lymph nodes from the right neck, including levels IA through IV, shows no evidence of metastatic carcinoma. In summary, the findings confirm a moderately to poorly differentiated squamous cell carcinoma of the right tongue, with vascular invasion, clear surgical margins, and no regional lymph node metastasis identified.",
-        "answer": "PC"
+        "source_id": "BRACS_1003706",
+        "report": "The slide shows dense eosinophilic collagenous stroma with scattered residual lobular ductal structures; the ducts are lined by a single layer of flattened to cuboidal epithelial cells, and the lobular acini are reduced in size, exhibiting flattened epithelial cells and scant luminal secretions.",
+        "answer": "Tissue: Breast, Diagnosis: Pathological Benign"
       }
     },
     {
       "id": "mod2-015",
       "label": "Case 015",
       "model": {
-        "source_id": "C3N-03011-24",
-        "report": "The microscopic examination of the specimen has yielded a diagnosis of invasive squamous cell carcinoma, not otherwise specified, which exhibits a grade of III. Notably, the tumor demonstrates focal invasion of the myometrium, although it does not contain any definitive evidence of angiolymphatic invasion. Furthermore, the carcinoma is found to be in close proximity to the deep margin of resection, a finding of potential significance. In addition to the malignant components, the specimen also contains benign squamous mucosa and stroma, which are devoid of any pathological alterations. A comprehensive examination of lymph nodes harvested from various anatomical locations, including the right para-aortic, right common iliac, right external iliac, right obturator, and left external iliac regions, has revealed no evidence of carcinoma. In summary, the diagnosis of invasive squamous cell carcinoma, not otherwise specified, is confirmed, characterized by its invasion of the myometrium and an absence of metastatic disease in the examined lymph nodes.",
-        "answer": "IC"
+        "source_id": "C3L-00528-21",
+        "report": "The slide shows brain parenchyma infiltrated by a high-grade astrocytic neoplasm composed of pleomorphic, anaplastic tumor cells with marked nuclear atypia and frequent mitotic activity, growing in a predominantly solid pattern with prominent microvascular / endothelial proliferation and geographic necrosis. Diagnosis: Glioblastoma (glioblastoma multiforme).",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
       }
     },
     {
       "id": "mod2-016",
       "label": "Case 016",
       "model": {
-        "source_id": "C3N-03849-22",
-        "report": "The histopathological examination of the submitted specimen has yielded a diagnosis of invasive squamous cell carcinoma, which exhibits moderate differentiation and is characterized by its keratinizing nature. This malignant process is found to involve multiple anatomical sites, including the right epiglottis, the right false vocal cord, and the right ventricle. Notably, the tumor extends to the margin of the anterior commissure on the right side, indicating a potential area of concern for residual disease. However, it is significant to note that all surgical margins are clear of tumor, suggesting a successful resection. Upon thorough examination, no evidence of lymphovascular space invasion is identified, which is an important prognostic factor. Additionally, the presence of chronic sialadenitis is observed, which is consistent with a previous biopsy. The lymph nodes retrieved from the right neck, encompassing levels IA through IV, have been thoroughly examined and found to be negative for tumor, indicating no regional lymph node metastasis. Based on these findings, the final diagnosis is confirmed as invasive squamous cell carcinoma, moderately differentiated, originating from the right larynx, with no evidence of lymph node involvement.",
-        "answer": "PC"
+        "source_id": "C3L-02642-25",
+        "report": "The slide shows a high-grade astrocytic neoplasm with marked cellularity and pleomorphism, including numerous small multinucleated tumor cells with brisk mitotic activity. Prominent microvascular proliferation and geographic necrosis with pseudopalisading of tumor cells are present.",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
       }
     },
     {
       "id": "mod2-017",
       "label": "Case 017",
       "model": {
-        "source_id": "C3N-03226-21",
-        "report": "A Tongue specimen, diagnosed as Squamous cell carcinoma, characterized by moderately to well-differentiated morphology with keratinization.",
-        "answer": "TC"
+        "source_id": "C3L-02706-24",
+        "report": "The slide shows a hypercellular infiltrating glial neoplasm with marked nuclear pleomorphism, brisk mitotic activity, microvascular proliferation, and geographic necrosis.",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
       }
     },
     {
       "id": "mod2-018",
       "label": "Case 018",
       "model": {
-        "source_id": "C3N-03458-21",
-        "report": "The histopathological assessment of the provided specimen has yielded a diagnosis of squamous cell carcinoma, characterized by a moderate degree of differentiation. Notably, the tumor exhibits invasive growth patterns, with extension into the mandibular bone. A thorough examination of the lymph nodes, encompassing those situated in the left neck levels I through IV, has revealed no evidence of metastatic disease. Furthermore, meticulous evaluation of the margins, including those of the left buccal mucosa, the posterior margin of the tongue, the lateral margin of the floor of the mouth, and the deep margin of the tongue, has confirmed that all are free from malignant involvement. Additional diagnostic clarity was provided by immunoperoxidase staining for the MIB-1 antigen, which demonstrated a focally positive reaction of the neoplastic cells, thereby supporting the diagnosis of squamous cell carcinoma. In summary, the diagnosis of squamous cell carcinoma, moderately differentiated, is established, with the notable absence of lymph node metastasis and negative surgical margins.",
-        "answer": "TC"
+        "source_id": "C3L-02970-21",
+        "report": "The slide shows brain parenchyma infiltrated by a malignant glial neoplasm composed of markedly atypical, hyperchromatic cells with nuclear pleomorphism and brisk mitotic activity, with prominent microvascular proliferation and foci of necrosis with pseudopalisading of tumor cells.",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
       }
     },
     {
       "id": "mod2-019",
       "label": "Case 019",
       "model": {
-        "source_id": "C3L-00369-23",
-        "report": "A Kidney specimen, diagnosed as Renal cell carcinoma of clear cell type, characterized by capsular invasion.",
-        "answer": "PC"
+        "source_id": "C3L-03372-24",
+        "report": "Section shows a high-grade infiltrating astrocytic neoplasm composed of densely cellular sheets of malignant glial cells with marked nuclear pleomorphism and hyperchromasia, including enlarged and irregular nuclei. Mitotic activity is present with numerous mitotic figures. Foci of geographic tumor necrosis and prominent microvascular (glomeruloid) proliferation are identified. Overall features are diagnostic of glioblastoma (glioblastoma multiforme).",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
       }
     },
     {
       "id": "mod2-020",
       "label": "Case 020",
       "model": {
-        "source_id": "C3L-00907-23",
-        "report": "Microscopic examination reveals a renal cell carcinoma, clear cell type, with a Fuhrman nuclear grade of III. The tumor invades into the capsule but does not extend into the perirenal adipose tissue, Gerota's fascia, or the renal vein. The surgical margins, including the perirenal adipose tissue and Gerota's fascia, are negative for malignancy. The non-neoplastic kidney shows minimal chronic changes, including focal global glomerulosclerosis, tubular atrophy, and interstitial fibrosis. The diagnosis is renal cell carcinoma, clear cell type, with a staging of pT1a, pNx.",
-        "answer": "PC"
+        "source_id": "C3N-03186-23",
+        "report": "Section shows brain parenchyma infiltrated by a high-grade astrocytic neoplasm composed of markedly atypical, pleomorphic hyperchromatic tumor cells with increased mitotic activity, prominent microvascular proliferation, and geographic necrosis with pseudopalisading of tumor cells around necrotic foci. Diagnosis: Glioblastoma (WHO grade 4).",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
       }
     },
     {
       "id": "mod2-021",
       "label": "Case 021",
       "model": {
-        "source_id": "C3L-01836-26",
-        "report": "Microscopic examination reveals cortical fibrosis in the kidney, characterized by the deposition of fibrous tissue within the cortical parenchyma, indicating a chronic pathological process. The fibrosis is associated with architectural distortion and disruption of the normal renal cortical architecture. The presence of fibrosis suggests a previous injury or disease process that has led to the replacement of normal renal tissue with scar tissue. The morphology is consistent with a scarred kidney cortex.",
-        "answer": "IC"
+        "source_id": "C3L-00369-23",
+        "report": "Clear cell renal cell carcinoma composed of nests and alveolar / acinar groups of polygonal cells with optically clear cytoplasm and distinct cell borders, separated by a delicate branching capillary network. Nuclei show conspicuous atypia with prominent nucleoli, consistent with Fuhrman nuclear grade 3.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
       }
     },
     {
       "id": "mod2-022",
       "label": "Case 022",
       "model": {
-        "source_id": "C3L-01955-22",
-        "report": "Microscopic examination reveals a renal cell carcinoma of papillary type, with a Fuhrman nuclear grade of 2, where the nuclei are predominantly grade 2. The tumor is confined to the kidney, with no evidence of invasion into the perirenal adipose tissue, Gerota's fascia, renal vein, or ureter. No lymphovascular invasion is identified. The surgical margins are clear of tumor. The non-neoplastic kidney tissue shows nephrosclerosis and mild chronic changes. The diagnosis is renal cell carcinoma, papillary type, Fuhrman grade 2.",
-        "answer": "IC"
+        "source_id": "C3L-00907-23",
+        "report": "Clear cell renal cell carcinoma composed of nests and alveolar / acinar groups of polygonal cells with optically clear cytoplasm and delicate branching vasculature; nuclei show conspicuous atypia with prominent nucleoli consistent with Fuhrman nuclear grade 3. Background renal parenchyma shows arterionephrosclerosis.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
       }
     },
     {
       "id": "mod2-023",
       "label": "Case 023",
       "model": {
-        "source_id": "C3L-02204-21",
-        "report": "The microscopic examination of the specimen has yielded a diagnosis of renal cell carcinoma, specifically of the chromophobe type, which exhibits a Fuhrman nuclear grade of 3 out of 4. Notably, the tumor demonstrates invasive behavior, extending into the renal capsule. However, a thorough evaluation of the specimen has failed to reveal any evidence of capsular invasion, thereby suggesting a relatively localized disease process. Furthermore, a meticulous examination of the lymph nodes, encompassing both the right and left pelvic regions, has not identified any metastatic disease. The non-neoplastic renal tissue exhibits changes consistent with nephrosclerosis, a condition characterized by hardening of the renal arteries. In summary, the diagnosis of renal cell carcinoma, chromophobe type, is confirmed, with no evidence of lymph node involvement and clear surgical margins, indicating a localized disease process.",
-        "answer": "IC"
+        "source_id": "C3L-01836-26",
+        "report": "The renal cortex demonstrates prominent vascular congestion with dilated capillaries and small veins containing erythrocytes; the interstitium shows moderate fibrosis composed of coarse collagen bundles that separate the acinar units and alter the lobular architecture.",
+        "answer": "Tissue: Kidney, Diagnosis: Non-tumor renal parenchyma"
       }
     },
     {
       "id": "mod2-024",
       "label": "Case 024",
       "model": {
-        "source_id": "C3N-01806-21",
-        "report": "Microscopic examination reveals a renal cell carcinoma of the clear cell type with focal sarcomatoid differentiation and a Fuhrman Grade of 3. The tumor is confined to the kidney, with no lymphovascular invasion identified, and the renal vein is negative for tumor. The ureter, perirenal adipose tissue, and Gerota's fascia are also negative for tumor. The surgical margins, including the soft tissue, ureteral, and vascular margins, are negative for tumor. The non-neoplastic kidney shows changes consistent with chronic kidney changes, including focal global glomerulosclerosis, tubular atrophy, and interstitial fibrosis, as well as arterial and arteriolar sclerosis. The diagnosis is renal cell carcinoma, clear cell type, with focal sarcomatoid differentiation.",
-        "answer": "PC"
+        "source_id": "C3L-01955-22",
+        "report": "The slide shows tightly packed renal cortical parenchyma with numerous glomeruli, many displaying global sclerosis with obliterated capillary loops and hyalinized matrix; the interstitium contains a moderate infiltrate of small lymphocytes and plasma cells with focal stromal fibrosis.",
+        "answer": "Tissue: Kidney, Diagnosis: Non-tumor renal parenchyma"
       }
     },
     {
       "id": "mod2-025",
       "label": "Case 025",
       "model": {
-        "source_id": "C3N-02763-21",
-        "report": "The histopathological assessment of the specimen has yielded a diagnosis of renal cell carcinoma, specifically of the clear cell subtype, which exhibits a Fuhrman nuclear grade of 3 out of 4. Notably, the tumor demonstrates invasive behavior, extending into the renal capsule. Furthermore, the tumor has extended into the perirenal adipose tissue, and upon examination of the lymph nodes, metastatic carcinoma was identified in two out of five nodes. It is significant that the surgical margins, encompassing both the perirenal adipose tissue and the Gerota's fascia, are free from malignant involvement. Additionally, the non-neoplastic renal tissue exhibits concomitant changes, including mild to moderate arteriolonephrosclerosis. In summary, the diagnosis of renal cell carcinoma, clear cell subtype, is confirmed, with evidence of lymph node metastasis, underscoring the necessity for comprehensive management.",
-        "answer": "PC"
+        "source_id": "C3L-02204-21",
+        "report": "The slide shows thyroid parenchyma involved by papillary thyroid carcinoma, classical type, composed of complex papillary fronds with fibrovascular cores lined by tumor cells with characteristic nuclear enlargement and overlap, irregular nuclear contours and hyperchromasia. Focal solid / follicular-type areas show increased cellularity with higher-grade nuclear features. No definite tumor necrosis, calcifications, or unequivocal tumor within vascular lumina is identified on the examined slide. Diagnosis: Papillary thyroid carcinoma, classical type, moderately differentiated (grade 2).",
+        "answer": "Tissue: Kidney, Diagnosis: Oncocytoma"
       }
     },
     {
       "id": "mod2-026",
       "label": "Case 026",
       "model": {
-        "source_id": "C3L-00004-21",
-        "report": "A Kidney specimen, diagnosed as Renal cell carcinoma of clear cell type, characterized by capsular invasion and Fuhrman grade 3.",
-        "answer": "TC"
+        "source_id": "C3N-01806-21",
+        "report": "Clear cell renal cell carcinoma composed of nests and alveolar sheets of polygonal cells with optically clear cytoplasm and delicate branching vasculature, showing marked nuclear pleomorphism with prominent nucleoli consistent with high nuclear grade. Tumor is present within spaces suspicious for lymphovascular invasion.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
       }
     },
     {
       "id": "mod2-027",
       "label": "Case 027",
       "model": {
-        "source_id": "C3L-00088-22",
-        "report": "Microscopic examination reveals renal cell carcinoma, clear cell type, with a Fuhrman grade of 3, characterized by capsular invasion but no involvement of the perirenal adipose tissue, Gerota's fascia, renal vein, or ureter. The surgical margins, including perirenal adipose tissue, Gerota's fascia, renal vein, renal artery, and ureter, are negative for malignancy. No lymph nodes are identified. The non-neoplastic kidney shows minimal chronic changes, including focal global glomerulosclerosis, tubular atrophy, and interstitial fibrosis, as well as arterial sclerosis. The diagnosis is renal cell carcinoma, clear cell type, with negative surgical margins and no evidence of lymph node metastasis, corresponding to an AJCC stage of pT2a pNx pMx.",
-        "answer": "TC"
+        "source_id": "C3N-02763-21",
+        "report": "The slide shows a renal neoplasm composed of nests, alveolar / acinar structures, and solid sheets of polygonal cells separated by a delicate branching capillary network. Tumor cells have abundant optically clear cytoplasm with distinct cell borders and enlarged irregular nuclei with conspicuous nucleoli, consistent with Fuhrman nuclear grade 3. Tumor cells are identified within vascular lumina, suspicious for lymphovascular invasion. Diagnosis: Clear cell renal cell carcinoma, Fuhrman grade 3, with tumor present within vascular lumina.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
       }
     },
     {
       "id": "mod2-028",
       "label": "Case 028",
       "model": {
-        "source_id": "C3L-00604-26",
-        "report": "Microscopic examination reveals no abnormalities in the lung tissue, with no notable findings or lesions present, indicating a morphology consistent with normal lung tissue.",
-        "answer": "TC"
+        "source_id": "C3L-00004-21",
+        "report": "The slide shows a renal neoplasm composed of nests, alveolar / acinar structures, and solid sheets of polygonal cells separated by a delicate branching capillary network. The tumor cells have abundant optically clear cytoplasm with distinct cell borders and enlarged atypical nuclei with conspicuous nucleoli, consistent with Fuhrman nuclear grade 3. Foci of hemorrhage are present; mitotic activity is not conspicuous in this slide and necrosis is not identified in this slide. Diagnosis: Clear cell renal cell carcinoma, Fuhrman nuclear grade 3.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
       }
     },
     {
       "id": "mod2-029",
       "label": "Case 029",
       "model": {
-        "source_id": "C3L-02349-21",
-        "report": "Microscopic examination reveals a tumour composed of squamous cell carcinoma, not otherwise specified (NOS), located in the right lower lobe, with a grade of II differentiation. The tumour exhibits characteristics of squamous carcinoma. The pathological classification is T2, NOS, with clinical M0. The histological comments and slide details are consistent with this diagnosis, confirming the presence of squamous cell carcinoma. Diagnosis: Squamous Cell Carcinoma, Not Otherwise Specified (NOS).",
-        "answer": "TC"
+        "source_id": "C3L-00088-22",
+        "report": "Clear cell renal cell carcinoma composed of nests and alveolar / acinar groups of polygonal cells with optically clear cytoplasm and delicate branching vasculature; nuclei show conspicuous pleomorphism with prominent nucleoli consistent with high nuclear grade. Background renal parenchyma shows chronic injury with arterionephrosclerosis.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
       }
     },
     {
       "id": "mod2-030",
       "label": "Case 030",
       "model": {
-        "source_id": "C3L-02619-26",
-        "report": "The histopathological examination of the provided specimens has yielded a diagnosis of invasive squamous cell carcinoma, which exhibits a range of differentiation, from moderate to poor. This malignant neoplasm is found to involve multiple anatomical sites, including the left upper lobe, the middle lobe, and the lower lobe of the lung. Notably, the tumor has extended beyond the lung parenchyma, invading the visceral pleura. Furthermore, the presence of vascular invasion is observed, underscoring the aggressive nature of this malignancy. The examination of the resection margins reveals that while the vascular margins are clear of tumor, the bronchial margin is found to be positive for carcinoma, indicating potential residual disease. A comprehensive evaluation of multiple lymph nodes, encompassing both peribronchial and intraparenchymal nodes, fails to demonstrate any evidence of metastatic disease. In addition to the malignant findings, the non-neoplastic lung tissue exhibits changes consistent with emphysema, along with a specific set of changes indicative of respiratory bronchiolitis. Immunohistochemical analysis, utilizing special stains such as p63, provides supportive evidence for the diagnosis of squamous cell carcinoma, thereby confirming the diagnosis of invasive squamous cell carcinoma of the lung.",
-        "answer": "IC"
+        "source_id": "C3L-01929-22",
+        "report": "The omental tissue shows a collagenous fibrosis composed of thick eosinophilic bundles forming a compact stroma, with scattered spindle \u2011 shaped fibroblastic cells interspersed among the collagen.",
+        "answer": "Tissue: Kidney, Diagnosis: Non-tumor renal parenchyma"
       }
     },
     {
       "id": "mod2-031",
       "label": "Case 031",
       "model": {
-        "source_id": "C3L-02957-23",
-        "report": "A Lung specimen, diagnosed as Squamous cell carcinoma, characterized by malignant squamous cells.",
-        "answer": "IC"
+        "source_id": "C3L-00604-26",
+        "report": "Lung parenchyma shows markedly enlarged, irregular airspaces with attenuation and loss of intervening alveolar septa; residual septal walls contain dense eosinophilic collagenous fibrosis that thickens the interstitium and effaces the normal alveolar architecture.",
+        "answer": "TC"
       }
     },
     {
       "id": "mod2-032",
       "label": "Case 032",
       "model": {
-        "source_id": "C3L-03969-25",
-        "report": "The histopathological examination of the submitted specimen has yielded significant findings, notably the presence of a lung tumor characterized by invasive moderately differentiated adenocarcinoma, exhibiting a specific subtype of bronchioloalveolar carcinoma. This tumor is noted to involve the left upper lobe of the lung and demonstrates extension to the parietal pleura, although it does not infiltrate the visceral pleura. Upon closer inspection, the tumor displays a high percentage of necrosis, indicative of its aggressive nature. Concomitantly, the non-neoplastic lung tissue exhibits changes consistent with emphysema, a condition often associated with chronic lung disease. An examination of the lymph nodes, including those from levels 9, 10, 5, and 7, has revealed no evidence of metastatic carcinoma, suggesting that the tumor has not spread to these lymph nodes. Furthermore, the margins of resection, including both the bronchial and vascular margins, have been evaluated and found to be free of tumor, which is a favorable prognostic indicator. In summary, the diagnosis is confirmed as invasive moderately differentiated adenocarcinoma of the left upper lobe of the lung, characterized by negative margins and an absence of lymph node metastasis.",
-        "answer": "PC"
+        "source_id": "C3L-02349-21",
+        "report": "Microscopic examination shows an invasive squamous cell carcinoma composed of nests and sheets of malignant squamous cells with eosinophilic cytoplasm and intercellular bridges, with areas of keratinization. Tumor cells demonstrate nuclear pleomorphism and hyperchromasia with increased mitotic activity.",
+        "answer": "TC"
       }
     },
     {
       "id": "mod2-033",
       "label": "Case 033",
       "model": {
-        "source_id": "C3L-03985-25",
-        "report": "A Lung specimen, diagnosed as Adenocarcinoma, characterized by papillary features.",
-        "answer": "PC"
+        "source_id": "C3L-02619-26",
+        "report": "Microscopic examination shows an invasive squamous cell carcinoma composed of nests, sheets, and irregular tongues of malignant squamoid cells with keratinization and intercellular bridges, with moderate to marked nuclear pleomorphism, hyperchromasia, and increased mitotic activity; geographic tumor necrosis is present. Foci of tumor within endothelial-lined spaces are identified. Diagnosis: Squamous cell carcinoma, moderately to poorly differentiated.",
+        "answer": "IC"
       }
     },
     {
       "id": "mod2-034",
       "label": "Case 034",
       "model": {
-        "source_id": "C3L-04404-21",
-        "report": "Microscopic examination reveals a tumour composed of squamous cell carcinoma, not otherwise specified, with a grade of II differentiation. The tumour is located in the right lower lobe. The pathological classification is T2, NOS, with clinical M0. Diagnosis: Squamous Cell Carcinoma, Not Otherwise Specified (NOS).",
-        "answer": "PC"
+        "source_id": "C3L-02957-23",
+        "report": "Lung parenchyma shows an invasive malignant epithelial neoplasm composed of irregular nests and solid sheets of atypical cells with marked nuclear pleomorphism and hyperchromasia, brisk mitotic activity, and limited glandular differentiation.",
+        "answer": "IC"
       }
     },
     {
       "id": "mod2-035",
       "label": "Case 035",
       "model": {
-        "source_id": "C3N-03054-22",
-        "report": "A Lung specimen, diagnosed as Adenocarcinoma, characterized by papillary features and moderate differentiation.",
-        "answer": "TC"
+        "source_id": "C3L-03969-25",
+        "report": "The slide shows an invasive adenocarcinoma with predominantly solid growth and focal acinar (gland \u2011 forming) architecture, composed of markedly atypical epithelial cells with enlarged pleomorphic hyperchromatic nuclei and frequent mitoses, consistent with a high \u2011 grade (poorly differentiated) adenocarcinoma. Foci of necrotic debris are present within the tumor. Adjacent lung parenchyma demonstrates small, well \u2011 formed non \u2011 necrotizing granulomas.",
+        "answer": "PC"
       }
     },
     {
       "id": "mod2-036",
       "label": "Case 036",
       "model": {
-        "source_id": "C3L-00401-22",
-        "report": "A Pancreas specimen, diagnosed as Ductal adenocarcinoma, characterized by moderately differentiated tumor cells with perineural invasion.",
+        "source_id": "C3L-03985-25",
+        "report": "The slide shows a malignant epithelial neoplasm composed predominantly of papillary architecture with fibrovascular cores and associated solid nests and sheets of tumor cells. The neoplastic cells display cytologic atypia with enlarged, pleomorphic, hyperchromatic nuclei and conspicuous nucleoli, consistent with high nuclear grade. Foci of tumor necrosis are present. Diagnosis: Lung adenocarcinoma, papillary type, high nuclear grade.",
         "answer": "PC"
       }
     },
@@ -798,53 +960,53 @@
       "id": "mod2-037",
       "label": "Case 037",
       "model": {
-        "source_id": "C3L-02463-24",
-        "report": "A Stomach specimen, diagnosed as Normal, characterized by the presence of muscularis propria.",
-        "answer": "IC"
+        "source_id": "C3L-04404-21",
+        "report": "The slide shows invasive squamous cell carcinoma composed of nests and sheets of malignant squamoid cells with keratinization and intercellular bridges, with moderate nuclear pleomorphism and mitotic activity.",
+        "answer": "PC"
       }
     },
     {
       "id": "mod2-038",
       "label": "Case 038",
       "model": {
-        "source_id": "C3L-02613-21",
-        "report": "Microscopic examination reveals a tumour composed of squamous cell carcinoma, not otherwise specified, arising in the uterus, with a grade of III. The pathological classification is T1b, with no lymph node involvement assessed (NX) and no distant metastasis (M0).",
-        "answer": "IC"
+        "source_id": "C3N-03054-22",
+        "report": "The slide shows an invasive carcinoma composed of irregular, infiltrative glandular / acinar structures with areas of solid growth, set within a desmoplastic stroma. Tumor cells display marked nuclear pleomorphism with hyperchromasia and conspicuous nucleoli, with increased mitotic activity. Foci of tumor are present within endothelial-lined vascular / lymphatic spaces, suspicious for lymphovascular invasion.",
+        "answer": "TC"
       }
     },
     {
       "id": "mod2-039",
       "label": "Case 039",
       "model": {
-        "source_id": "C3L-04473-24",
-        "report": "A Pancreas specimen, diagnosed as Normal, characterized by numerous islets and normal pancreatic morphology.",
-        "answer": "TC"
+        "source_id": "C3L-00401-22",
+        "report": "The slide shows an infiltrative high \u2011 grade pancreatic ductal adenocarcinoma composed of irregular, angulated and fused glands with areas of solid growth in a desmoplastic stroma; tumor cells display marked nuclear pleomorphism, hyperchromasia, and brisk mitotic activity, with foci of tumor necrosis. Perineural invasion is present, and findings within endothelial \u2011 lined vascular / lymphatic spaces are suspicious for lymphovascular invasion.",
+        "answer": "PC"
       }
     },
     {
       "id": "mod2-040",
       "label": "Case 040",
       "model": {
-        "source_id": "C3N-01714-21",
-        "report": "The microscopic examination of the specimen has yielded a diagnosis of pancreatic invasive ductal adenocarcinoma, which exhibits a range of differentiation, from moderate to poor. Notably, this malignant tumor displays a solid growth pattern, with the formation of a distinct mass. Upon closer inspection, it is evident that the tumor has invaded the peripancreatic soft tissue and has also invaded the duodenum, with the additional finding of perineural invasion. However, a thorough examination has not revealed any evidence of lymph node involvement. The surgical margins have been carefully evaluated, and it has been determined that they are negative for carcinoma, with the common bile duct, pancreatic duct, and deep radial margins all being free of tumor. Furthermore, the specimen exhibits chronic pancreatitis, as well as focal high-grade pancreatic intraepithelial neoplasia. Based on these findings, the diagnosis of pancreatic invasive ductal adenocarcinoma is confirmed, with a stage classification of pT3 pNO.",
-        "answer": "PC"
+        "source_id": "C3L-02463-24",
+        "report": "Pancreatic parenchyma shows tightly packed acini with basophilic granular cytoplasm and centrally placed round nuclei, interspersed with small ducts lined by a single layer of cuboidal to low columnar epithelium; the surrounding stroma contains a loose fibrous matrix with scattered fibroblasts.",
+        "answer": "IC"
       }
     },
     {
       "id": "mod2-041",
       "label": "Case 041",
       "model": {
-        "source_id": "3c0e4614fe9fc45936749d12d29bb127",
-        "report": "The microscopic examination of the provided specimen has yielded a diagnosis of prostatic adenocarcinoma, specifically of the acinar type, characterized by a Gleason score of 7, which is derived from a combination of primary and secondary patterns of 3 and 4, respectively. Notably, the tumor remains confined within the prostatic gland, without any evidence of extracapsular extension. Furthermore, no invasion of the angiolymphatic vessels was observed. The surgical margins, which have been carefully evaluated and are free of carcinoma, are free of carcinoma in the right posterior, right anterior, left posterior, and left anterior regions. In addition to the neoplastic findings, the non-neoplastic prostate tissue exhibits changes consistent with nodular hyperplasia. The lymph nodes sampled from both the right and left pelvic regions have been thoroughly examined and found to be benign, with no evidence of metastatic disease. Based on these findings, the final diagnosis is prostatic adenocarcinoma, classified as pT2a, with no indication of lymph node metastasis, thereby corresponding to a pathological stage of pT2a, pNX.",
-        "answer": "TC"
+        "source_id": "C3L-02613-21",
+        "report": "The slide shows an invasive squamous cell carcinoma composed of irregular nests, cords, and sheets of malignant squamous cells infiltrating cervical stroma, with minimal keratinization consistent with poor differentiation. Tumor cells display marked nuclear pleomorphism, hyperchromasia, and increased mitotic activity, with focal tumor necrosis.",
+        "answer": "IC"
       }
     },
     {
       "id": "mod2-042",
       "label": "Case 042",
       "model": {
-        "source_id": "771b4d1f002ddd740017d6e4371df8d0",
-        "report": "A Prostate specimen, diagnosed as Prostatic adenocarcinoma, characterized by a Gleason score of 7 with primary and secondary patterns of 3 and 4.",
+        "source_id": "C3L-04473-24",
+        "report": "The slide shows tightly packed acinar units composed of cells with eosinophilic granular cytoplasm and small central nuclei, interspersed with islets of Langerhans composed of cells with pale cytoplasm and round nuclei; the intervening stroma is scant and fibrous.",
         "answer": "TC"
       }
     },
@@ -852,35 +1014,35 @@
       "id": "mod2-043",
       "label": "Case 043",
       "model": {
-        "source_id": "a295d73e91c9f8d8d16a8c1a3469714a",
-        "report": "The microscopic examination conducted on the specimen has led to the identification of a prostatic adenocarcinoma, which exhibits a Gleason score of 7. This score is derived from a combination of primary pattern 3 and secondary pattern 4 components. Notably, the Gleason pattern 4 component constitutes approximately 25% of the tumor volume. Upon closer inspection, it is observed that the tumor approaches the inked margin of the right posterior lobe, although it does not exhibit extraprostatic extension. Furthermore, perineural invasion is a feature of this tumor. In addition to the neoplastic findings, high-grade prostatic intraepithelial neoplasia is also a feature of this specimen. The lymph nodes, which were sampled from both the right and left pelvic regions, do not contain any carcinomatous tissue. Based on these findings, the diagnosis of prostatic adenocarcinoma, Gleason score 7, is confirmed.",
-        "answer": "IC"
+        "source_id": "C3N-01714-21",
+        "report": "The slide shows an infiltrative, moderately cellular pancreatic ductal adenocarcinoma composed of irregular angulated glands and small duct \u2011 like structures within a desmoplastic stroma, with tumor cells exhibiting enlarged hyperchromatic nuclei and nuclear pleomorphism. Adjacent ducts demonstrate high \u2011 grade pancreatic intraepithelial neoplasia (PanIN \u2011 3) with atypical ductal epithelium replacing pre \u2011 existing ducts. Perineural invasion is suspected. No tumor necrosis or intravascular tumor is identified. Diagnosis: Invasive moderately differentiated pancreatic ductal adenocarcinoma with perineural invasion.",
+        "answer": "PC"
       }
     },
     {
       "id": "mod2-044",
       "label": "Case 044",
       "model": {
-        "source_id": "bedeb6cf82f3257a34cfdad3dba80413",
-        "report": "The microscopic examination of the specimen has yielded a diagnosis of high-grade invasive carcinoma, characterized by a solid growth pattern and extensive ductal differentiation. The tumor exhibits a high nuclear grade and is accompanied by focal high-grade ductal carcinoma in situ. Upon closer inspection, it is evident that the invasive carcinoma has infiltrated the transparenchymal veins and has also extended into the stromal tissue of the prostate. Furthermore, perineural invasion is a feature of this tumor, although angiolymphatic invasion is not observed. The surgical margins are free of carcinoma, indicating a successful resection. The non-neoplastic prostate tissue shows changes consistent with nodular hyperplasia and chronic inflammation. A thorough examination of the lymph nodes has not revealed any metastatic carcinoma. Based on these findings, the diagnosis is confirmed as invasive high-grade prostatic adenocarcinoma, staged as pT3a NO Mx.",
-        "answer": "PC"
+        "source_id": "3c0e4614fe9fc45936749d12d29bb127",
+        "report": "The slide shows prostatic acinar adenocarcinoma composed of infiltrative, crowded small glands with an admixed component of fused / poorly formed glands, consistent with Gleason pattern 3 with pattern 4 (Gleason score 3+4 = 7). The tumor glands are lined by atypical epithelial cells with enlarged hyperchromatic nuclei and conspicuous nucleoli. Background prostate shows nodular glandular and stromal hyperplasia with foci of high \u2011 grade prostatic intraepithelial neoplasia.",
+        "answer": "TC"
       }
     },
     {
       "id": "mod2-045",
       "label": "Case 045",
       "model": {
-        "source_id": "c9bcd1d4867a43cec02af7f3b555709f",
-        "report": "A Prostate specimen, diagnosed as Adenocarcinoma, characterized by a Gleason score of 8 with extraprostatic extension and perineural invasion.",
-        "answer": "PC"
+        "source_id": "771b4d1f002ddd740017d6e4371df8d0",
+        "report": "The slide shows prostatic acinar adenocarcinoma composed of infiltrative, crowded small glands with areas of fused / poorly formed glandular architecture, consistent with Gleason pattern 3 and 4 (Gleason score 3+4 = 7). Glands are lined by atypical secretory cells with enlarged nuclei and conspicuous nucleoli. Perineural invasion is suspected. Background prostate shows nodular glandular and stromal hyperplasia.",
+        "answer": "TC"
       }
     },
     {
       "id": "mod2-046",
       "label": "Case 046",
       "model": {
-        "source_id": "e19325ebb64adc3293f7173d7a337409",
-        "report": "The microscopic examination of the specimen has yielded a diagnosis of prostatic adenocarcinoma, characterized by a Gleason score of 8, which is derived from a primary pattern of 3 and a secondary pattern of 4. Notably, the tumor exhibits focal extraprostatic extension, as well as evidence of perineural and angiolymphatic invasion. Upon evaluation of the surgical margins, it was determined that the right posterior lateral margin is positive for carcinoma, whereas the remaining margins are free of malignant cells. Furthermore, the seminal vesicles were found to be uninvolved by the tumor, and a thorough examination of the lymph nodes, including those obtained from both the right and left pelvic regions, did not reveal any evidence of metastatic disease. In addition to the neoplastic findings, the non-neoplastic prostate tissue exhibits changes consistent with nodular hyperplasia. Based on these findings, the diagnosis of prostatic adenocarcinoma is confirmed, with a pathological TNM stage designated as pT3a pNO.",
+        "source_id": "a295d73e91c9f8d8d16a8c1a3469714a",
+        "report": "The slide shows prostatic acinar adenocarcinoma composed of infiltrative, crowded small glands with areas of fused / poorly formed glands, lined by atypical cells with enlarged hyperchromatic nuclei and conspicuous nucleoli; associated high \u2011 grade prostatic intraepithelial neoplasia is present, and perineural invasion is identified.",
         "answer": "IC"
       }
     },
@@ -888,8 +1050,8 @@
       "id": "mod2-047",
       "label": "Case 047",
       "model": {
-        "source_id": "C3L-00356-22",
-        "report": "The microscopic findings confirm a diagnosis of papillary serous adenocarcinoma of the endometrium, with the tumor invading the myometrium and showing signs of lymphovascular space invasion. The tumor is confined to the uterus, sparing the cervix, with all margins clear of disease. Lymph nodes from multiple regions, including the right and left para-aortic and pelvic areas, do not contain metastatic disease. Away from the tumor, the endometrium has atrophic changes, and the myometrium contains leiomyomas. Overall, the tumor is classified as a grade II papillary serous adenocarcinoma of the endometrium, with no evidence of spread to the lymph nodes or other areas examined.",
+        "source_id": "bedeb6cf82f3257a34cfdad3dba80413",
+        "report": "Prostatic tissue shows numerous tightly packed glands lined by tall columnar to cuboidal epithelial cells with basal nuclei and moderate nuclear pleomorphism; the glands are forming irregular, variably sized glandular units, some containing fused or poorly formed glands, and the intervening stroma is desmoplastic with scattered inflammatory cells.",
         "answer": "PC"
       }
     },
@@ -897,17 +1059,17 @@
       "id": "mod2-048",
       "label": "Case 048",
       "model": {
-        "source_id": "C3L-01355-22",
-        "report": "Microscopic examination reveals an endometrioid adenocarcinoma, with the tumor extending into the outer half of the myometrium, and no lymphovascular space invasion is identified. Multiple lymph nodes, including right and left para-aortic, right and left external iliac, right and left obturator, and right and left common iliac lymph nodes, are negative for metastatic carcinoma. The diagnosis is endometrioid adenocarcinoma of the endometrium, grade II, with no lymph node metastasis.",
-        "answer": "TC"
+        "source_id": "c9bcd1d4867a43cec02af7f3b555709f",
+        "report": "The slide demonstrates prostatic adenocarcinoma composed predominantly of small, tightly packed glands with loss of normal acinar architecture, with interspersed fused or poorly formed glands consistent with Gleason pattern 5 admixed with predominant gland formation (pattern 3). The neoplastic glands are lined by atypical epithelial cells with enlarged hyperchromatic nuclei and conspicuous nucleoli, and mitotic activity is present. Perineural invasion is identified by malignant glands surrounding and tracking along nerves.",
+        "answer": "PC"
       }
     },
     {
       "id": "mod2-049",
       "label": "Case 049",
       "model": {
-        "source_id": "C3L-02125-27",
-        "report": "Microscopic examination reveals a tumor composed of endometrioid adenocarcinoma, with a grade of III. The tumor involves the uterus, specifically the lateral wall, and is associated with an atrophic endometrium. The cervix is not involved, and the serosa is not involved. The right fallopian tube shows involvement by carcinoma, while the left fallopian tube is not involved. The lymph nodes, including those from the right and left pelvic regions, are negative for tumor. The diagnosis is endometrioid adenocarcinoma, grade III, of the uterus.",
+        "source_id": "e19325ebb64adc3293f7173d7a337409",
+        "report": "Acinar units are decreased in number with small, tightly packed glands forming scant, empty \u2011 appearing glandular spaces; the remaining ducts are lined by flattened to cuboidal epithelium, and the interlobular stroma is expanded by dense collagenous fibrous tissue with scattered residual glandular structures.",
         "answer": "IC"
       }
     },
@@ -915,28 +1077,190 @@
       "id": "mod2-050",
       "label": "Case 050",
       "model": {
-        "source_id": "C3L-02389-22",
-        "report": "The microscopic examination conducted on the specimen has led to the diagnosis of an endometrioid adenocarcinoma, classified as grade 3 based on its histological characteristics.\nThe adenocarcinoma exhibits invasion into the myometrium, with the depth of invasion confined to the inner half of the myometrial thickness, and no invasion of the endocervix is observed.\nThe endometrium displays atrophic changes, the myometrium contains leiomyomas, and the adnexal structures reveal no remarkable findings.\nExamination of the right and left pelvic lymph nodes and the right and left para-aortic nodes shows no evidence of metastatic disease, and the margins of the specimen are uninvolved by carcinoma.\nIn summary, the diagnosis is endometrioid adenocarcinoma, grade 3, with no evidence of lymph node metastasis.",
-        "answer": "IC"
+        "source_id": "C3L-00356-22",
+        "report": "The slide shows a malignant epithelial neoplasm composed of complex papillary and gland-forming proliferations with marked nuclear pleomorphism, hyperchromasia, brisk mitotic activity, and foci of necrosis.",
+        "answer": "PC"
       }
     },
     {
       "id": "mod2-051",
       "label": "Case 051",
       "model": {
-        "source_id": "C3L-03143-21",
-        "report": "Microscopic examination of the provided section shows a high-grade epithelial carcinoma with predominantly papillary and solid architecture. The tumor is composed of complex papillary structures and densely cellular epithelial proliferations, morphologically compatible with a serous carcinoma pattern.",
-        "answer": "PC"
+        "source_id": "C3L-01355-22",
+        "report": "Endometrium shows a well-differentiated endometrioid adenocarcinoma composed predominantly of crowded, back-to-back glands with minimal solid growth, lined by atypical pseudostratified columnar cells with moderate nuclear pleomorphism and mitotic activity.",
+        "answer": "TC"
       }
     },
     {
       "id": "mod2-052",
       "label": "Case 052",
       "model": {
+        "source_id": "C3L-02125-27",
+        "report": "The slide shows an infiltrative malignant epithelial neoplasm composed of crowded, irregular glands with areas of solid growth, lined by markedly atypical cells with enlarged pleomorphic hyperchromatic nuclei and conspicuous mitotic activity.",
+        "answer": "IC"
+      }
+    },
+    {
+      "id": "mod2-053",
+      "label": "Case 053",
+      "model": {
+        "source_id": "C3L-02389-22",
+        "report": "The slide shows a cystic cavity lined by a single layer of flattened to cuboidal epithelial cells overlying dense fibrous stroma; the surrounding myocardium consists of uniform cardiac myocytes with cross \u2011 striations.",
+        "answer": "IC"
+      }
+    },
+    {
+      "id": "mod2-054",
+      "label": "Case 054",
+      "model": {
+        "source_id": "C3L-03143-21",
+        "report": "The slide shows a malignant epithelial neoplasm with papillary and complex glandular architecture composed of markedly atypical cells possessing enlarged pleomorphic hyperchromatic nuclei and conspicuous mitotic activity, accompanied by scattered psammoma bodies and foci of tumor necrosis.",
+        "answer": "PC"
+      }
+    },
+    {
+      "id": "mod2-055",
+      "label": "Case 055",
+      "model": {
         "source_id": "C3N-01879-21",
-        "report": "Microscopic examination reveals a polyp composed of endometrioid adenocarcinoma with focal squamous differentiation, arising in the endometrium and extending to the lower uterine segment, with no myometrial invasion identified and no lymphovascular space invasion.\nThe tumor is accompanied by adenomyosis and a leiomyoma. The cervix and adnexa do not show significant pathologic change.\nExamination of the lymph nodes, including those from the right and left pelvic regions, shows no evidence of metastatic disease.\nThe diagnosis is adenocarcinoma of the endometrium, FIGO grade 1, with no evidence of metastasis to the lymph nodes examined.",
+        "report": "The slide shows numerous well \u2011 formed, crowded endometrioid \u2011 type glands with scant intervening stroma and mild nuclear atypia.",
         "answer": "TC"
       }
+    },
+    {
+      "id": "mod2-056",
+      "label": "Case 056",
+      "model": {
+        "source_id": "C3N-04691-21",
+        "report": "The slide shows a neoplasm composed of pleomorphic, hyperchromatic tumor cells in a desmoplastic stroma, with areas of solid growth.",
+        "answer": "Tissue: Brain, Diagnosis: Glioblastoma (glioblastoma multiforme)"
+      }
+    },
+    {
+      "model": {
+        "source_id": "C3L-00446-22",
+        "report": "Microscopic examination shows a malignant epithelial neoplasm composed of predominantly solid nests and sheets of atypical large cells with marked nuclear pleomorphism, hyperchromasia, and brisk mitotic activity, with focal squamoid differentiation and a mild lymphocytic infiltrate.",
+        "answer": ""
+      },
+      "id": "mod2-057",
+      "label": "Case 057"
+    },
+    {
+      "model": {
+        "source_id": "C3L-01461-21",
+        "report": "The slide shows a renal neoplasm composed of solid nests and trabeculae of polygonal cells with abundant pale to eosinophilic cytoplasm and distinct cell borders, separated by prominent vascular septa; nuclei are enlarged, irregular, and contain prominent nucleoli. Broad geographic necrosis is present, and tumor cells are identified within spaces suspicious for lymphovascular invasion.",
+        "answer": "Tissue: Kidney, Diagnosis: Oncocytoma"
+      },
+      "id": "mod2-058",
+      "label": "Case 058"
+    },
+    {
+      "model": {
+        "source_id": "C3L-01553-22",
+        "report": "Dense collagenous fibrosis replaces normal breast architecture, forming thick eosinophilic bands that encircle and separate residual lobular units; the remaining ductal and acinar structures are compressed within the fibrotic stroma.",
+        "answer": "Tissue: Kidney, Diagnosis: Non-tumor renal parenchyma"
+      },
+      "id": "mod2-059",
+      "label": "Case 059"
+    },
+    {
+      "model": {
+        "source_id": "C3L-02346-21",
+        "report": "The slide shows a renal epithelial neoplasm composed predominantly of papillary fronds with fibrovascular cores lined by tumor cells with enlarged, overlapping, optically clear nuclei and conspicuous nucleoli, consistent with papillary renal cell carcinoma. No definite tumor necrosis or unequivocal tumor within vascular lumina is identified on this slide.",
+        "answer": "Tissue: Kidney, Diagnosis: Clear Cell Renal Cell Carcinoma"
+      },
+      "id": "mod2-060",
+      "label": "Case 060"
+    },
+    {
+      "model": {
+        "source_id": "C3L-03678-21",
+        "report": "The slide shows an invasive adenocarcinoma composed of irregular infiltrative glands and acinar structures with focal solid growth, lined by atypical epithelial cells with enlarged pleomorphic hyperchromatic nuclei and increased mitotic activity, consistent with a moderately differentiated adenocarcinoma.",
+        "answer": ""
+      },
+      "id": "mod2-061",
+      "label": "Case 061"
+    },
+    {
+      "model": {
+        "source_id": "C3L-03963-25",
+        "report": "The slide shows an invasive squamous cell carcinoma composed of irregular nests and sheets of malignant polygonal cells with eosinophilic cytoplasm and intercellular bridges, with marked nuclear pleomorphism, hyperchromasia, and increased mitotic activity, consistent with a poorly differentiated (grade 3) squamous cell carcinoma.",
+        "answer": ""
+      },
+      "id": "mod2-062",
+      "label": "Case 062"
+    },
+    {
+      "model": {
+        "source_id": "C3L-04365-22",
+        "report": "The slide shows a pleomorphic sarcoma with storiform architecture, marked nuclear pleomorphism and hyperchromasia, brisk mitotic activity, and prominent geographic tumor necrosis.",
+        "answer": ""
+      },
+      "id": "mod2-063",
+      "label": "Case 063"
+    },
+    {
+      "model": {
+        "source_id": "C3N-00247-21",
+        "report": "The slide shows invasive squamous cell carcinoma composed of irregular nests, cords, and sheets of malignant squamous cells infiltrating pulmonary parenchyma, with poor differentiation characterized by limited keratinization, enlarged hyperchromatic pleomorphic nuclei, and increased mitotic activity; focal tumor necrosis is present. Tumor is identified within endothelial-lined vascular / lymphatic spaces, consistent with lymphovascular invasion.",
+        "answer": ""
+      },
+      "id": "mod2-064",
+      "label": "Case 064"
+    },
+    {
+      "model": {
+        "source_id": "C3N-00492-23",
+        "report": "The slide shows an endometrial adenocarcinoma composed of irregular, crowded malignant glands with complex architecture and focal solid growth, lined by atypical columnar cells with enlarged hyperchromatic nuclei and conspicuous nuclear pleomorphism, consistent with papillary thyroid carcinoma. Background thyroid parenchyma shows nodular hyperplasia with variably sized colloid \u2011 filled follicles.",
+        "answer": ""
+      },
+      "id": "mod2-065",
+      "label": "Case 065"
+    },
+    {
+      "model": {
+        "source_id": "C3N-01177-24",
+        "report": "The slide shows papillary thyroid carcinoma, classical type, composed of complex papillary fronds with fibrovascular cores lined by tumor cells with enlarged overlapping nuclei showing clearing and grooves. Background thyroid parenchyma shows chronic lymphocytic thyroiditis with dense lymphoid infiltrates and reactive follicular epithelial changes.",
+        "answer": ""
+      },
+      "id": "mod2-066",
+      "label": "Case 066"
+    },
+    {
+      "model": {
+        "source_id": "C3N-01904-24",
+        "report": "The slide shows a malignant epithelial neoplasm composed of nests and alveolar / acinar structures of polygonal cells with abundant clear cytoplasm and a delicate branching capillary network; nuclei are enlarged and atypical with prominent nucleoli. Tumor is present within spaces suspicious for lymphovascular invasion.",
+        "answer": ""
+      },
+      "id": "mod2-067",
+      "label": "Case 067"
+    },
+    {
+      "model": {
+        "source_id": "C3N-02145-27",
+        "report": "Lung parenchyma shows a diffuse infiltrate of atypical epithelial cells with marked cytologic atypia, including nuclear enlargement and pleomorphism, producing disruption of normal alveolar architecture.",
+        "answer": ""
+      },
+      "id": "mod2-068",
+      "label": "Case 068"
+    },
+    {
+      "model": {
+        "source_id": "C3N-03205-23",
+        "report": "Lung parenchyma shows an infiltrative epithelial neoplasm composed of irregular nests, sheets, and duct \u2011 like / glandular structures within a desmoplastic stroma, with cytologic atypia including enlarged hyperchromatic pleomorphic nuclei and increased mitotic activity; focal tumor necrosis is present.",
+        "answer": ""
+      },
+      "id": "mod2-069",
+      "label": "Case 069"
+    },
+    {
+      "model": {
+        "source_id": "C3N-04609-22",
+        "report": "Microscopic examination shows an infiltrative malignant epithelial neoplasm composed predominantly of solid nests and sheets of atypical cells with marked nuclear pleomorphism, hyperchromasia, and extensive tumor necrosis, consistent with poorly differentiated squamous cell carcinoma. Adjacent lung parenchyma shows lipoid / foreign-body type pneumonia with intra-alveolar lipid-laden macrophages and associated fibrosis.",
+        "answer": ""
+      },
+      "id": "mod2-070",
+      "label": "Case 070"
     }
   ]
 }
