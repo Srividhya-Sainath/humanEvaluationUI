@@ -7,12 +7,6 @@ import HumanValidityTab, {
   type ReportAudit,
 } from "./components/HumanValidityTab.vue";
 
-type HallucinationType =
-  | "typeI"
-  | "typeII"
-  | "typeIII"
-  | "misclassification"
-  | "none";
 type TabId = "human-validity" | "llm-audit";
 
 type CaseReport = {
@@ -21,6 +15,10 @@ type CaseReport = {
   report: string;
   wsiDziUrl: string;
   answer: string;
+  llmLabel: string;
+  llmHallucination: string;
+  llmContext: string;
+  llmCase: string;
 };
 
 type SingleModelCase = {
@@ -39,7 +37,15 @@ type PairedCase = {
 type RawSingleCase = {
   id: string;
   label: string;
-  model: { source_id: string; report: string; answer?: string };
+  model: {
+    source_id: string;
+    report: string;
+    answer?: string;
+    LLM_Label?: string;
+    LLM_hallucination?: string;
+    LLM_context?: string;
+    LLM_case?: string;
+  };
 };
 
 type HumanValidityAnnotation = {
@@ -47,7 +53,14 @@ type HumanValidityAnnotation = {
   model1: ReportAudit;
   model2: ReportAudit;
 };
-type HallucinationEntry = { type: HallucinationType | null; notes: string };
+type Agreement = "agree" | "disagree" | null;
+type HallucinationEntry = {
+  labelAgreement: Agreement;
+  hallucinationAgreement: Agreement;
+  contextAgreement: Agreement;
+  caseAgreement: Agreement;
+  comments: string;
+};
 type HallucinationAnnotation = { model1: HallucinationEntry; model2: HallucinationEntry };
 
 const defaultReportAudit = (): ReportAudit => ({
@@ -109,6 +122,13 @@ const currentHumanValidityCase = computed(
 const currentHallucinationCase = computed(
   () => pairedCases.value.find((c) => c.id === activeCaseIdByTab.value["llm-audit"]) ?? null
 );
+const isCurrentHumanValidityComplete = computed(() => {
+  const c = currentHallucinationCase.value;
+  if (!c) return false;
+  const hv = humanValidity.value[c.id];
+  if (!hv?.selectedId) return false;
+  return isReportAuditComplete(hv.model1) && isReportAuditComplete(hv.model2);
+});
 
 const disablePrev = computed(() => caseIndex.value <= 0);
 const humanValidity = ref<Record<string, HumanValidityAnnotation>>({});
@@ -129,7 +149,16 @@ const activeValidationReady = computed(() => {
   }
   const entry = hallucinationCheck.value[activeId];
   if (!entry) return false;
-  return !!entry.model1.type && !!entry.model2.type;
+  return (
+    !!entry.model1.labelAgreement &&
+    !!entry.model1.hallucinationAgreement &&
+    !!entry.model1.contextAgreement &&
+    !!entry.model1.caseAgreement &&
+    !!entry.model2.labelAgreement &&
+    !!entry.model2.hallucinationAgreement &&
+    !!entry.model2.contextAgreement &&
+    !!entry.model2.caseAgreement
+  );
 });
 
 const disableNext = computed(() => {
@@ -153,7 +182,18 @@ const progressPercent = computed(() => {
   }
   for (const c of pairedCases.value) {
     const entry = hallucinationCheck.value[c.id];
-    if (entry?.model1.type && entry?.model2.type) completed += 1;
+    if (
+      entry?.model1.labelAgreement &&
+      entry?.model1.hallucinationAgreement &&
+      entry?.model1.contextAgreement &&
+      entry?.model1.caseAgreement &&
+      entry?.model2.labelAgreement &&
+      entry?.model2.hallucinationAgreement &&
+      entry?.model2.contextAgreement &&
+      entry?.model2.caseAgreement
+    ) {
+      completed += 1;
+    }
   }
 
   return Math.round((completed / total) * 100);
@@ -167,7 +207,18 @@ const allTasksComplete = computed(() => {
     if (!hv?.selectedId || !isReportAuditComplete(hv.model1) || !isReportAuditComplete(hv.model2)) return false;
 
     const hc = hallucinationCheck.value[c.id];
-    if (!hc?.model1.type || !hc.model2.type) return false;
+    if (
+      !hc?.model1.labelAgreement ||
+      !hc.model1.hallucinationAgreement ||
+      !hc.model1.contextAgreement ||
+      !hc.model1.caseAgreement ||
+      !hc.model2.labelAgreement ||
+      !hc.model2.hallucinationAgreement ||
+      !hc.model2.contextAgreement ||
+      !hc.model2.caseAgreement
+    ) {
+      return false;
+    }
   }
 
   return true;
@@ -216,12 +267,18 @@ function normalizeHallucinationState(
   for (const [caseId, entry] of Object.entries(payload)) {
     normalized[caseId] = {
       model1: {
-        type: (entry as any)?.model1?.type ?? null,
-        notes: (entry as any)?.model1?.notes ?? "",
+        labelAgreement: (entry as any)?.model1?.labelAgreement ?? null,
+        hallucinationAgreement: (entry as any)?.model1?.hallucinationAgreement ?? null,
+        contextAgreement: (entry as any)?.model1?.contextAgreement ?? null,
+        caseAgreement: (entry as any)?.model1?.caseAgreement ?? null,
+        comments: (entry as any)?.model1?.comments ?? "",
       },
       model2: {
-        type: (entry as any)?.model2?.type ?? null,
-        notes: (entry as any)?.model2?.notes ?? "",
+        labelAgreement: (entry as any)?.model2?.labelAgreement ?? null,
+        hallucinationAgreement: (entry as any)?.model2?.hallucinationAgreement ?? null,
+        contextAgreement: (entry as any)?.model2?.contextAgreement ?? null,
+        caseAgreement: (entry as any)?.model2?.caseAgreement ?? null,
+        comments: (entry as any)?.model2?.comments ?? "",
       },
     };
   }
@@ -262,8 +319,20 @@ function ensureHumanValidityState(caseId: string) {
 function ensureHallucinationState(caseId: string) {
   if (!hallucinationCheck.value[caseId]) {
     hallucinationCheck.value[caseId] = {
-      model1: { type: null, notes: "" },
-      model2: { type: null, notes: "" },
+      model1: {
+        labelAgreement: null,
+        hallucinationAgreement: null,
+        contextAgreement: null,
+        caseAgreement: null,
+        comments: "",
+      },
+      model2: {
+        labelAgreement: null,
+        hallucinationAgreement: null,
+        contextAgreement: null,
+        caseAgreement: null,
+        comments: "",
+      },
     };
   }
 }
@@ -302,22 +371,26 @@ function updateHumanModel2Audit(v: ReportAudit) {
   entry.model2 = v;
 }
 
-function updateHallucinationType(modelId: "model1" | "model2", v: HallucinationType | null) {
+function updateHallucinationAgreement(
+  modelId: "model1" | "model2",
+  field: "labelAgreement" | "hallucinationAgreement" | "contextAgreement" | "caseAgreement",
+  v: Agreement
+) {
   const c = currentHallucinationCase.value;
   if (!c) return;
   ensureHallucinationState(c.id);
   const entry = hallucinationCheck.value[c.id];
   if (!entry) return;
-  entry[modelId].type = v;
+  entry[modelId][field] = v;
 }
 
-function updateHallucinationNotes(modelId: "model1" | "model2", v: string) {
+function updateHallucinationComments(modelId: "model1" | "model2", v: string) {
   const c = currentHallucinationCase.value;
   if (!c) return;
   ensureHallucinationState(c.id);
   const entry = hallucinationCheck.value[c.id];
   if (!entry) return;
-  entry[modelId].notes = v;
+  entry[modelId].comments = v;
 }
 
 const STORAGE_KEY = "human-eval-state-v2";
@@ -362,6 +435,10 @@ onMounted(() => {
           report: c.model.report,
           wsiDziUrl: `${tilesBaseUrl}/tiles/${c.model.source_id}.dzi`,
           answer: c.model.answer ?? "",
+          llmLabel: c.model.LLM_Label ?? "",
+          llmHallucination: c.model.LLM_hallucination ?? "",
+          llmContext: c.model.LLM_context ?? "",
+          llmCase: c.model.LLM_case ?? "",
         },
       });
 
@@ -436,8 +513,20 @@ function exportJson() {
         model2: defaultReportAudit(),
       },
       llmAsEvaluatorAuditing: hallucinationCheck.value[c.id] ?? {
-        model1: { type: null, notes: "" },
-        model2: { type: null, notes: "" },
+        model1: {
+          labelAgreement: null,
+          hallucinationAgreement: null,
+          contextAgreement: null,
+          caseAgreement: null,
+          comments: "",
+        },
+        model2: {
+          labelAgreement: null,
+          hallucinationAgreement: null,
+          contextAgreement: null,
+          caseAgreement: null,
+          comments: "",
+        },
       },
     })),
   };
@@ -475,13 +564,37 @@ const currentReportsForHumanValidity = computed<
 });
 
 const currentReportsForHallucination = computed<
-  { id: "model1" | "model2"; name: string; text: string }[]
+  {
+    id: "model1" | "model2";
+    name: string;
+    text: string;
+    llmLabel: string;
+    llmHallucination: string;
+    llmContext: string;
+    llmCase: string;
+  }[]
 >(() => {
   const c = currentHallucinationCase.value;
   if (!c) return [];
   return [
-    { id: "model1", name: "Model 1", text: c.model1.report },
-    { id: "model2", name: "Model 2", text: c.model2.report },
+    {
+      id: "model1",
+      name: "Model 1",
+      text: c.model1.report,
+      llmLabel: c.model1.llmLabel,
+      llmHallucination: c.model1.llmHallucination,
+      llmContext: c.model1.llmContext,
+      llmCase: c.model1.llmCase,
+    },
+    {
+      id: "model2",
+      name: "Model 2",
+      text: c.model2.report,
+      llmLabel: c.model2.llmLabel,
+      llmHallucination: c.model2.llmHallucination,
+      llmContext: c.model2.llmContext,
+      llmCase: c.model2.llmCase,
+    },
   ];
 });
 </script>
@@ -536,14 +649,20 @@ const currentReportsForHallucination = computed<
               :reports="currentReportsForHallucination"
               :caseLabel="currentHallucinationCase?.label || ''"
               :wsiDziUrl="currentHallucinationCase?.model1.wsiDziUrl || ''"
-              :model1Type="hallucinationCheck[currentHallucinationCase?.id ?? '']?.model1.type ?? null"
-              :model2Type="hallucinationCheck[currentHallucinationCase?.id ?? '']?.model2.type ?? null"
-              :model1Notes="hallucinationCheck[currentHallucinationCase?.id ?? '']?.model1.notes ?? ''"
-              :model2Notes="hallucinationCheck[currentHallucinationCase?.id ?? '']?.model2.notes ?? ''"
-              @update:model1Type="(v) => updateHallucinationType('model1', v)"
-              @update:model2Type="(v) => updateHallucinationType('model2', v)"
-              @update:model1Notes="(v) => updateHallucinationNotes('model1', v)"
-              @update:model2Notes="(v) => updateHallucinationNotes('model2', v)"
+              :groundTruth="currentHallucinationCase?.model1.answer || ''"
+              :tab1Complete="isCurrentHumanValidityComplete"
+              :model1Agreement="hallucinationCheck[currentHallucinationCase?.id ?? '']?.model1"
+              :model2Agreement="hallucinationCheck[currentHallucinationCase?.id ?? '']?.model2"
+              @update:model1Label="(v) => updateHallucinationAgreement('model1', 'labelAgreement', v)"
+              @update:model2Label="(v) => updateHallucinationAgreement('model2', 'labelAgreement', v)"
+              @update:model1Hallucination="(v) => updateHallucinationAgreement('model1', 'hallucinationAgreement', v)"
+              @update:model2Hallucination="(v) => updateHallucinationAgreement('model2', 'hallucinationAgreement', v)"
+              @update:model1Context="(v) => updateHallucinationAgreement('model1', 'contextAgreement', v)"
+              @update:model2Context="(v) => updateHallucinationAgreement('model2', 'contextAgreement', v)"
+              @update:model1Case="(v) => updateHallucinationAgreement('model1', 'caseAgreement', v)"
+              @update:model2Case="(v) => updateHallucinationAgreement('model2', 'caseAgreement', v)"
+              @update:model1Comments="(v) => updateHallucinationComments('model1', v)"
+              @update:model2Comments="(v) => updateHallucinationComments('model2', v)"
             />
           </Tabs>
         </div>

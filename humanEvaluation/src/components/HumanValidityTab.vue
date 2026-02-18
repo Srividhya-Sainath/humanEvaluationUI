@@ -1,23 +1,62 @@
 <template>
-  <div class="h-full min-h-0 overflow-auto xl:overflow-hidden grid grid-cols-1 xl:grid-cols-2 gap-2">
+  <div
+    v-if="showIntro"
+    class="h-full min-h-0 border border-sky-200 bg-white p-4 overflow-y-auto"
+  >
+    <h2 class="text-sm md:text-base font-semibold text-slate-900">Welcome: Pathologist Evaluation Context</h2>
+    <p class="mt-2 text-xs text-slate-700">
+      You will evaluate AI-generated pathology reports against the displayed WSI.
+      Complete the five tasks in order for each case.
+    </p>
+    <div class="mt-3 text-xs text-slate-700 space-y-1">
+      <p><span class="font-semibold">1)</span> Pick the most clinically usable report.</p>
+      <p><span class="font-semibold">2)</span> Assess Diagnostic Validity.</p>
+      <p><span class="font-semibold">3)</span> Assess Hallucination content.</p>
+      <p><span class="font-semibold">4)</span> Rate Severity of issues.</p>
+      <p><span class="font-semibold">5)</span> Estimate Minimal-edit distance to a signable report.</p>
+    </div>
+    <p class="mt-3 text-xs text-slate-600">
+      Your selections are autosaved per case. Use the stepper to track completion.
+    </p>
+    <button
+      type="button"
+      class="mt-4 px-3 py-2 border border-sky-300 bg-sky-100 text-slate-900 text-xs font-semibold"
+      @click="showIntro = false"
+    >
+      Start Evaluation
+    </button>
+  </div>
+
+  <div v-else class="h-full min-h-0 overflow-auto xl:overflow-hidden grid grid-cols-1 xl:grid-cols-2 gap-2">
+    <div class="xl:col-span-2 sticky top-0 z-20 border border-sky-200 bg-white/95 backdrop-blur-sm p-2">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-1.5 text-xs">
+        <div class="step-chip" :class="stepClass(isPickComplete)">1) Pick the most clinically usable report</div>
+        <div class="step-chip" :class="stepClass(isDiagnosticComplete)">2) Diagnostic Validity</div>
+        <div class="step-chip" :class="stepClass(isHallucinationComplete)">3) Hallucination Assessment</div>
+        <div class="step-chip" :class="stepClass(isSeverityComplete)">4) Severity Assessment</div>
+        <div class="step-chip" :class="stepClass(isEditDistanceComplete)">5) Minimal-edit distance</div>
+      </div>
+      <p class="mt-1 text-xs text-slate-600">Next required action: <span class="font-semibold">{{ nextActionLabel }}</span></p>
+    </div>
+
     <div class="min-h-0 flex flex-col gap-2">
       <section
-        class="rounded-2xl border p-2.5 min-h-0 flex flex-col xl:h-[380px] transition-all"
+        class="rounded-none border p-2.5 min-h-0 flex flex-col xl:h-[280px] transition-all"
         :class="sectionStateClass(true)"
       >
-        <div class="flex-1 min-h-0 rounded-2xl border border-sky-200 bg-white overflow-hidden">
+        <div class="flex-1 min-h-0 rounded-none border border-sky-200 bg-white overflow-hidden">
           <WsiViewer :dziUrl="wsiDziUrl" />
         </div>
       </section>
 
       <section
-        class="rounded-2xl border p-2.5 min-h-0 flex-1 flex flex-col overflow-hidden transition-all"
+        class="rounded-none border p-2.5 min-h-0 flex-1 flex flex-col overflow-hidden transition-all"
         :class="sectionStateClass(true)"
       >
         <h3 class="text-xs md:text-sm font-semibold text-slate-900">1) Pick the most clinically usable report</h3>
         <p class="mt-1.5 text-xs text-slate-600">
-          <span class="rounded-md bg-emerald-100 px-1.5 py-0.5 text-emerald-900">Ground truth:</span>
-          <span class="font-semibold text-slate-800 rounded-md bg-emerald-100 px-1.5 py-0.5 text-emerald-900">
+          <span class="rounded-none bg-emerald-100 px-1.5 py-0.5 text-emerald-900">Ground truth:</span>
+          <span class="font-semibold text-slate-800 rounded-none bg-emerald-100 px-1.5 py-0.5 text-emerald-900">
             {{ groundTruth || "N/A" }}
           </span>
         </p>
@@ -27,7 +66,7 @@
             <div
               v-for="r in reports"
               :key="r.id"
-              class="rounded-xl border p-2.5 transition-all"
+              class="rounded-none border p-2.5 transition-all"
               :class="selectedId === r.id ? 'border-sky-300 bg-sky-100/70' : 'border-sky-200 bg-white'"
             >
               <div class="flex items-center justify-between gap-3">
@@ -48,14 +87,14 @@
                 readonly
                 :rows="rowsForReport(r.text)"
                 :value="r.text"
-                class="mt-2 w-full rounded-xl border border-sky-200 bg-sky-50/70 p-2.5 text-[13px] leading-relaxed text-slate-800 resize-none overflow-y-auto"
+                class="mt-2 w-full rounded-none border border-sky-200 bg-sky-50/70 p-2.5 text-[13px] leading-relaxed text-slate-800 resize-none overflow-y-auto"
               />
             </div>
           </div>
 
           <button
             type="button"
-            class="w-full mt-2 px-3 py-2 rounded-xl text-xs font-semibold border transition-all text-left"
+            class="w-full mt-2 px-3 py-2 rounded-none text-xs font-semibold border transition-all text-left"
             :class="selectedId === 'none'
               ? 'bg-sky-200 text-slate-900 border-sky-300'
               : 'bg-sky-100 text-slate-700 border-sky-200'"
@@ -69,7 +108,8 @@
 
     <div class="min-h-0 flex flex-col gap-2">
       <section
-        class="rounded-2xl border p-2.5 min-h-0 flex-1 overflow-y-auto transition-all"
+        ref="diagnosticBlockEl"
+        class="rounded-none border p-2.5 min-h-0 flex-1 overflow-y-auto transition-all"
         :class="sectionStateClass(isPickComplete)"
       >
         <h3 class="task-title text-slate-900">2) Diagnostic Validity</h3>
@@ -87,7 +127,7 @@
           <div
             v-for="r in reports"
             :key="`diagnostic-${r.id}`"
-            class="rounded-xl border border-sky-200 bg-white p-2.5"
+            class="rounded-none border border-sky-200 bg-white p-2.5"
           >
             <div class="text-xs font-bold uppercase tracking-wide text-slate-700">{{ r.name }}</div>
             <div class="mt-2 flex flex-wrap gap-2">
@@ -96,9 +136,11 @@
                 :key="opt.value"
                 type="button"
                 class="px-2.5 py-1 rounded-full text-xs font-semibold border transition-all text-left"
+                :disabled="!isPickComplete"
                 :class="currentAudit(r.id).validity === opt.value
                   ? 'bg-sky-200 text-slate-900 border-sky-300'
                   : 'bg-sky-100/70 text-slate-700 border-sky-200'"
+                :title="!isPickComplete ? 'Complete step 1 first' : ''"
                 @click="updateAudit(r.id, 'validity', opt.value)"
               >
                 {{ opt.label }}
@@ -111,6 +153,7 @@
         <p class="mt-1.5 text-xs text-slate-700 task-desc">
           Assess whether the report contains hallucinated content.
         </p>
+        <p v-if="!isDiagnosticComplete" class="mt-1 text-xs text-amber-700">Complete Diagnostic Validity for both models to unlock this step.</p>
         <div class="mt-1.5 text-xs text-slate-600 space-y-0.5">
           <p>
             <span class="font-semibold text-slate-700">CONTEXT MISMATCH</span> - Incorrect tissue site or diagnosis,
@@ -131,7 +174,7 @@
           <div
             v-for="r in reports"
             :key="`hallucination-${r.id}`"
-            class="rounded-xl border border-sky-200 bg-white p-2.5"
+            class="rounded-none border border-sky-200 bg-white p-2.5"
           >
             <div class="text-xs font-bold uppercase tracking-wide text-slate-700">{{ r.name }}</div>
             <div class="mt-2 flex flex-wrap gap-2">
@@ -140,9 +183,11 @@
                 :key="opt.value"
                 type="button"
                 class="px-2.5 py-1 rounded-full text-xs font-semibold border transition-all text-left"
+                :disabled="!isDiagnosticComplete"
                 :class="currentAudit(r.id).issueType === opt.value
                   ? 'bg-sky-200 text-slate-900 border-sky-300'
                   : 'bg-sky-100/70 text-slate-700 border-sky-200'"
+                :title="!isDiagnosticComplete ? 'Complete step 2 first' : ''"
                 @click="updateAudit(r.id, 'issueType', opt.value)"
               >
                 {{ opt.label }}
@@ -153,7 +198,8 @@
       </section>
 
       <section
-        class="rounded-2xl border p-2.5 min-h-0 flex-1 overflow-y-auto transition-all"
+        ref="severityBlockEl"
+        class="rounded-none border p-2.5 min-h-0 flex-1 overflow-y-auto transition-all"
         :class="sectionStateClass(isValidityAndHallucinationComplete)"
       >
         <h3 class="task-title text-slate-900">4) Severity Assessment</h3>
@@ -166,11 +212,13 @@
           <p><span class="font-semibold text-slate-700">MAJOR</span> - Clinically significant error that could affect diagnosis, management, or patient safety.</p>
         </div>
 
+        <p v-if="!isValidityAndHallucinationComplete" class="mt-1 text-xs text-amber-700">Complete steps 2 and 3 for both models to unlock this block.</p>
+
         <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
           <div
             v-for="r in reports"
             :key="`${r.id}-severity`"
-            class="rounded-xl border border-sky-200 bg-white p-2.5"
+            class="rounded-none border border-sky-200 bg-white p-2.5"
           >
             <div class="text-xs font-bold uppercase tracking-wide text-slate-700">{{ r.name }}</div>
 
@@ -180,9 +228,11 @@
                 :key="opt.value"
                 type="button"
                 class="px-2.5 py-1 rounded-full text-xs font-semibold border transition-all"
+                :disabled="!isValidityAndHallucinationComplete"
                 :class="currentAudit(r.id).severity === opt.value
                   ? 'bg-sky-200 text-slate-900 border-sky-300'
                   : 'bg-sky-100/70 text-slate-700 border-sky-200'"
+                :title="!isValidityAndHallucinationComplete ? 'Complete steps 2 and 3 first' : ''"
                 @click="updateAudit(r.id, 'severity', opt.value)"
               >
                 {{ opt.label }}
@@ -206,7 +256,7 @@
           <div
             v-for="r in reports"
             :key="`${r.id}-edit-distance`"
-            class="rounded-xl border border-sky-200 bg-white p-2.5"
+            class="rounded-none border border-sky-200 bg-white p-2.5"
           >
             <div class="text-xs font-bold uppercase tracking-wide text-slate-700">{{ r.name }}</div>
             <div class="mt-2 flex flex-wrap gap-2">
@@ -215,9 +265,11 @@
                 :key="opt.value"
                 type="button"
                 class="px-2.5 py-1 rounded-full text-xs font-semibold border transition-all"
+                :disabled="!isSeverityComplete"
                 :class="currentAudit(r.id).editDistance === opt.value
                   ? 'bg-sky-200 text-slate-900 border-sky-300'
                   : 'bg-sky-100/70 text-slate-700 border-sky-200'"
+                :title="!isSeverityComplete ? 'Complete step 4 first' : ''"
                 @click="updateAudit(r.id, 'editDistance', opt.value)"
               >
                 {{ opt.label }}
@@ -233,7 +285,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, nextTick, ref, watch } from "vue";
 import WsiViewer from "./WsiViewer.vue";
 
 export type ClinicalValidity = "acceptable" | "unacceptable" | "uncertain";
@@ -263,6 +315,8 @@ const emit = defineEmits<{
   (e: "update:model2Audit", v: ReportAudit): void;
 }>();
 
+const showIntro = ref(true);
+
 const validityOptions: { value: ClinicalValidity; label: string }[] = [
   { value: "acceptable", label: "ACCEPTABLE" },
   { value: "unacceptable", label: "UNACCEPTABLE" },
@@ -288,10 +342,41 @@ const editDistanceOptions: { value: EditDistance; label: string }[] = [
 const currentAudit = (id: "model1" | "model2") => (id === "model1" ? props.model1Audit : props.model2Audit);
 
 const isPickComplete = computed(() => !!props.selectedId);
+const isDiagnosticComplete = computed(() => !!props.model1Audit.validity && !!props.model2Audit.validity);
+const isHallucinationComplete = computed(() => !!props.model1Audit.issueType && !!props.model2Audit.issueType);
+const isSeverityComplete = computed(() => !!props.model1Audit.severity && !!props.model2Audit.severity);
+const isEditDistanceComplete = computed(() => !!props.model1Audit.editDistance && !!props.model2Audit.editDistance);
 const isValidityAndHallucinationComplete = computed(() => {
   const model1 = props.model1Audit;
   const model2 = props.model2Audit;
   return !!model1.validity && !!model2.validity && !!model1.issueType && !!model2.issueType;
+});
+
+const diagnosticBlockEl = ref<HTMLElement | null>(null);
+const severityBlockEl = ref<HTMLElement | null>(null);
+
+const nextActionLabel = computed(() => {
+  if (!isPickComplete.value) return "Step 1: Pick the most clinically usable report.";
+  if (!isDiagnosticComplete.value) return "Step 2: Complete Diagnostic Validity for both models.";
+  if (!isHallucinationComplete.value) return "Step 3: Complete Hallucination Assessment for both models.";
+  if (!isSeverityComplete.value) return "Step 4: Complete Severity Assessment for both models.";
+  if (!isEditDistanceComplete.value) return "Step 5: Complete Minimal-edit distance for both models.";
+  return "All steps complete for this case.";
+});
+
+const stepClass = (done: boolean) =>
+  done ? "border-emerald-300 bg-emerald-100 text-emerald-900" : "border-slate-200 bg-slate-100 text-slate-600";
+
+watch(isPickComplete, async (v) => {
+  if (!v) return;
+  await nextTick();
+  diagnosticBlockEl.value?.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+watch(isValidityAndHallucinationComplete, async (v) => {
+  if (!v) return;
+  await nextTick();
+  severityBlockEl.value?.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 const sectionStateClass = (isActive: boolean) =>
@@ -313,6 +398,11 @@ const rowsForReport = (text: string) => {
 </script>
 
 <style scoped>
+.step-chip {
+  border: 1px solid;
+  padding: 0.25rem 0.5rem;
+}
+
 .task-title {
   font-size: 0.75rem;
   line-height: 1rem;
