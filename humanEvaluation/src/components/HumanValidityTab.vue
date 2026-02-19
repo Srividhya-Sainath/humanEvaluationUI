@@ -30,7 +30,7 @@
   <div
     v-else
     ref="tabBodyEl"
-    class="h-full min-h-0 overflow-auto xl:overflow-hidden grid grid-cols-1 xl:grid-cols-2 gap-2"
+    class="h-full min-h-0 overflow-auto xl:overflow-hidden grid grid-cols-1 xl:grid-cols-[minmax(340px,44%)_minmax(0,56%)] gap-2"
     :style="tabBodyStyle"
   >
     <div class="xl:col-span-2 sticky top-0 z-20 border border-sky-200 bg-white/95 backdrop-blur-sm p-2">
@@ -118,14 +118,14 @@
         :class="sectionStateClass(isPickComplete)"
       >
         <h3 class="task-title text-slate-900">2) Diagnostic Validity</h3>
-        <p class="mt-1.5 text-xs text-slate-700 task-desc">
+        <p class="mt-1.5 text-[11px] text-slate-700 task-desc">
           Assess the clinical validity and diagnostic correctness of the report based on the provided slide. Would you sign
           this report in its current form?
         </p>
-        <div class="mt-1.5 text-xs text-slate-600 space-y-0.5">
-          <p><span class="font-semibold text-slate-700">ACCEPTABLE</span> - Diagnostically correct; only minor edits needed.</p>
-          <p><span class="font-semibold text-slate-700">UNACCEPTABLE</span> - Major errors or clinically significant omissions.</p>
-          <p><span class="font-semibold text-slate-700">UNCERTAIN</span> - Diagnosis unsupported, insufficient, or unsafe.</p>
+        <div class="mt-1.5 text-[11px] text-slate-600 space-y-0.5">
+          <p><span class="text-[11px] font-semibold text-slate-700">ACCEPTABLE</span> - Diagnostically correct; only minor edits needed.</p>
+          <p><span class="text-[11px] font-semibold text-slate-700">UNACCEPTABLE</span> - Major errors or clinically significant omissions, or unsafe.</p>
+          <p><span class="text-[11px] font-semibold text-slate-700">UNCERTAIN</span> - Diagnosis unsupported or insufficient.</p>
         </div>
 
         <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -134,13 +134,13 @@
             :key="`diagnostic-${r.id}`"
             class="rounded-none border border-sky-200 bg-white p-2.5"
           >
-            <div class="text-xs font-bold uppercase tracking-wide text-slate-700">{{ r.name }}</div>
-            <div class="mt-2 flex flex-wrap gap-2">
+            <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap pb-1">
+              <div class="text-xs font-bold uppercase tracking-wide text-slate-700 shrink-0 min-w-[70px]">{{ r.name }}</div>
               <button
                 v-for="opt in validityOptions"
                 :key="opt.value"
                 type="button"
-                class="px-2.5 py-1 rounded-full text-xs font-semibold border transition-all text-left"
+                class="px-2.5 py-1 rounded-full text-xs font-semibold border transition-all text-left shrink-0"
                 :disabled="!isPickComplete"
                 :class="currentAudit(r.id).validity === opt.value
                   ? 'bg-sky-200 text-slate-900 border-sky-300'
@@ -155,22 +155,21 @@
         </div>
 
         <h3 class="mt-3 task-title text-slate-900">3) Hallucination Assessment</h3>
-        <p class="mt-1.5 text-xs text-slate-700 task-desc">
+        <p class="mt-1.5 text-[11px] text-slate-700 task-desc">
           Assess whether the report contains hallucinated content.
         </p>
         <p v-if="!isDiagnosticComplete" class="mt-1 text-xs text-amber-700">Complete Diagnostic Validity for both models to unlock this step.</p>
-        <div class="mt-1.5 text-xs text-slate-600 space-y-0.5">
+        <div class="mt-1.5 text-[11px] text-slate-600 space-y-0.5">
           <p>
-            <span class="font-semibold text-slate-700">CONTEXT MISMATCH</span> - Incorrect tissue site or diagnosis,
-            fabricated supporting features, or internal contradictions (e.g., multiple incompatible diagnoses in a single
-            slide).
+            <span class="text-[11px] font-semibold text-slate-700">CONTEXT MISMATCH (CTX-MIS)</span> - Report content conflicts with
+            the slide context. Ex.: Lung parenchyma incorrectly classified as skin, a single slide contains multiple tissue sites.
           </p>
           <p>
-            <span class="font-semibold text-slate-700">CASE-LEVEL OVERREACH</span> - Mentions information not inferable from
+            <span class="text-[11px] font-semibold text-slate-700">CASE-LEVEL OVERREACH (CASE-HALL)</span> - Mentions information not inferable from
             this slide (e.g., molecular biomarkers, lymph node status or multi-slide level information).
           </p>
           <p>
-            <span class="font-semibold text-slate-700">NO HALLUCINATION</span> - No unsupported or fabricated content
+            <span class="text-[11px] font-semibold text-slate-700">NO HALLUCINATION (NO-HALL)</span> - No unsupported or fabricated content
             detected.
           </p>
         </div>
@@ -181,13 +180,13 @@
             :key="`hallucination-${r.id}`"
             class="rounded-none border border-sky-200 bg-white p-2.5"
           >
-            <div class="text-xs font-bold uppercase tracking-wide text-slate-700">{{ r.name }}</div>
-            <div class="mt-2 flex flex-wrap gap-2">
+            <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap pb-1">
+              <div class="text-xs font-bold uppercase tracking-wide text-slate-700 shrink-0 min-w-[70px]">{{ r.name }}</div>
               <button
                 v-for="opt in issueTypeOptions"
                 :key="opt.value"
                 type="button"
-                class="px-2.5 py-1 rounded-full text-xs font-semibold border transition-all text-left"
+                class="px-2.5 py-1 rounded-full text-xs font-semibold border transition-all text-left shrink-0"
                 :disabled="!isDiagnosticComplete"
                 :class="currentAudit(r.id).issueType === opt.value
                   ? 'bg-sky-200 text-slate-900 border-sky-300'
@@ -200,21 +199,18 @@
             </div>
           </div>
         </div>
-      </section>
-
-      <section
-        ref="severityBlockEl"
-        class="rounded-none border p-2.5 min-h-0 flex-1 overflow-y-auto transition-all"
-        :class="sectionStateClass(isValidityAndHallucinationComplete)"
-      >
+        <div
+          ref="severityBlockEl"
+          class="mt-3 border-t border-sky-200 pt-3"
+        >
         <h3 class="task-title text-slate-900">4) Severity Assessment</h3>
-        <p class="mt-1.5 text-xs text-slate-700 task-desc">
+        <p class="mt-1.5 text-[11px] text-slate-700 task-desc">
           If an error or hallucination is present, rate its clinical severity.
         </p>
-        <div class="mt-1.5 text-xs text-slate-600 space-y-0.5">
-          <p><span class="font-semibold text-slate-700">NONE</span> - No clinically relevant issue.</p>
-          <p><span class="font-semibold text-slate-700">MINOR</span> - Inaccuracy unlikely to affect diagnosis or patient management.</p>
-          <p><span class="font-semibold text-slate-700">MAJOR</span> - Clinically significant error that could affect diagnosis, management, or patient safety.</p>
+        <div class="mt-1.5 text-[11px] text-slate-600 space-y-0.5">
+          <p><span class="text-[11px] font-semibold text-slate-700">NONE</span> - No clinically relevant issue.</p>
+          <p><span class="text-[11px] font-semibold text-slate-700">MINOR</span> - Inaccuracy unlikely to affect diagnosis or patient management.</p>
+          <p><span class="text-[11px] font-semibold text-slate-700">MAJOR</span> - Clinically significant error that could affect diagnosis, management, or patient safety.</p>
         </div>
 
         <p v-if="!isValidityAndHallucinationComplete" class="mt-1 text-xs text-amber-700">Complete steps 2 and 3 for both models to unlock this block.</p>
@@ -225,14 +221,13 @@
             :key="`${r.id}-severity`"
             class="rounded-none border border-sky-200 bg-white p-2.5"
           >
-            <div class="text-xs font-bold uppercase tracking-wide text-slate-700">{{ r.name }}</div>
-
-            <div class="mt-2 flex flex-wrap gap-2">
+            <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap pb-1">
+              <div class="text-xs font-bold uppercase tracking-wide text-slate-700 shrink-0 min-w-[70px]">{{ r.name }}</div>
               <button
                 v-for="opt in severityOptions"
                 :key="opt.value"
                 type="button"
-                class="px-2.5 py-1 rounded-full text-xs font-semibold border transition-all"
+                class="px-2.5 py-1 rounded-full text-xs font-semibold border transition-all shrink-0"
                 :disabled="!isValidityAndHallucinationComplete"
                 :class="currentAudit(r.id).severity === opt.value
                   ? 'bg-sky-200 text-slate-900 border-sky-300'
@@ -247,14 +242,14 @@
         </div>
 
         <h3 class="mt-3 text-xs md:text-sm font-semibold text-slate-900">5) Minimal-edit distance</h3>
-        <p class="mt-1.5 text-xs text-slate-700 task-desc">
+        <p class="mt-1.5 text-[11px] text-slate-700 task-desc">
           Estimate the amount of effort required to revise this report to a clinically signable version.
         </p>
-        <div class="mt-1.5 text-xs text-slate-600 space-y-0.5">
-          <p><span class="font-semibold text-slate-700">0-1 min</span> - Minimal wording edits only.</p>
-          <p><span class="font-semibold text-slate-700">2-5 min</span> - Minor corrections or additions needed.</p>
-          <p><span class="font-semibold text-slate-700">6-10 min</span> - Substantial revisions required.</p>
-          <p><span class="font-semibold text-slate-700">&gt;10 min</span> - Major rewriting required.</p>
+        <div class="mt-1.5 text-[11px] text-slate-600 space-y-0.5">
+          <p><span class="text-[11px] font-semibold text-slate-700">0-1 min</span> - Minimal wording edits only.</p>
+          <p><span class="text-[11px] font-semibold text-slate-700">2-5 min</span> - Minor corrections or additions needed.</p>
+          <p><span class="text-[11px] font-semibold text-slate-700">6-10 min</span> - Substantial revisions required.</p>
+          <p><span class="text-[11px] font-semibold text-slate-700">&gt;10 min</span> - Major rewriting required.</p>
         </div>
 
         <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -263,13 +258,13 @@
             :key="`${r.id}-edit-distance`"
             class="rounded-none border border-sky-200 bg-white p-2.5"
           >
-            <div class="text-xs font-bold uppercase tracking-wide text-slate-700">{{ r.name }}</div>
-            <div class="mt-2 flex flex-wrap gap-2">
+            <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap pb-1">
+              <div class="text-xs font-bold uppercase tracking-wide text-slate-700 shrink-0 min-w-[70px]">{{ r.name }}</div>
               <button
                 v-for="opt in editDistanceOptions"
                 :key="opt.value"
                 type="button"
-                class="px-2.5 py-1 rounded-full text-xs font-semibold border transition-all"
+                class="px-2.5 py-1 rounded-full text-xs font-semibold border transition-all shrink-0"
                 :disabled="!isSeverityComplete"
                 :class="currentAudit(r.id).editDistance === opt.value
                   ? 'bg-sky-200 text-slate-900 border-sky-300'
@@ -284,6 +279,7 @@
         </div>
 
         <div class="mt-2 text-[11px] text-slate-500">{{ caseLabel }}</div>
+        </div>
       </section>
     </div>
   </div>
@@ -332,9 +328,9 @@ const validityOptions: { value: ClinicalValidity; label: string }[] = [
   { value: "uncertain", label: "UNCERTAIN" },
 ];
 const issueTypeOptions: { value: IssueType; label: string }[] = [
-  { value: "context_mismatch", label: "CONTEXT MISMATCH" },
-  { value: "case_overreach", label: "CASE-LEVEL OVERREACH" },
-  { value: "no_hallucination", label: "NO HALLUCINATION" },
+  { value: "context_mismatch", label: "CONTEXT-MISMATCH" },
+  { value: "case_overreach", label: "CASE-OVERREACH" },
+  { value: "no_hallucination", label: "NO-HALLUCINATION" },
 ];
 const severityOptions: { value: Severity; label: string }[] = [
   { value: "none", label: "None" },
