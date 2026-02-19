@@ -27,7 +27,12 @@
     </button>
   </div>
 
-  <div v-else class="h-full min-h-0 overflow-auto xl:overflow-hidden grid grid-cols-1 xl:grid-cols-2 gap-2">
+  <div
+    v-else
+    ref="tabBodyEl"
+    class="h-full min-h-0 overflow-auto xl:overflow-hidden grid grid-cols-1 xl:grid-cols-2 gap-2"
+    :style="tabBodyStyle"
+  >
     <div class="xl:col-span-2 sticky top-0 z-20 border border-sky-200 bg-white/95 backdrop-blur-sm p-2">
       <div class="grid grid-cols-1 md:grid-cols-5 gap-1.5 text-xs">
         <div class="step-chip" :class="stepClass(isPickComplete)">1) Pick the most clinically usable report</div>
@@ -41,7 +46,7 @@
 
     <div class="min-h-0 flex flex-col gap-2">
       <section
-        class="rounded-none border p-2.5 min-h-0 flex flex-col xl:h-[360px] transition-all"
+        class="rounded-none border p-2.5 min-h-0 flex flex-col h-[clamp(220px,34vh,420px)] xl:h-[clamp(240px,36vh,460px)] transition-all"
         :class="sectionStateClass(true)"
       >
         <div class="flex-1 min-h-0 rounded-none border border-sky-200 bg-white overflow-hidden">
@@ -285,7 +290,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref, watch } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import WsiViewer from "./WsiViewer.vue";
 
 export type ClinicalValidity = "acceptable" | "unacceptable" | "uncertain";
@@ -316,6 +321,10 @@ const emit = defineEmits<{
 }>();
 
 const showIntro = ref(true);
+const tabBodyEl = ref<HTMLElement | null>(null);
+const viewportWidth = ref(0);
+const viewportHeight = ref(0);
+const tabBodyHeight = ref<number | null>(null);
 
 const validityOptions: { value: ClinicalValidity; label: string }[] = [
   { value: "acceptable", label: "ACCEPTABLE" },
@@ -355,6 +364,27 @@ const isValidityAndHallucinationComplete = computed(() => {
 const diagnosticBlockEl = ref<HTMLElement | null>(null);
 const severityBlockEl = ref<HTMLElement | null>(null);
 
+const updateViewportMetrics = () => {
+  if (typeof window === "undefined") return;
+  viewportWidth.value = window.innerWidth;
+  viewportHeight.value = window.innerHeight;
+};
+
+const recalcTabBodyHeight = async () => {
+  if (typeof window === "undefined") return;
+  await nextTick();
+  if (!tabBodyEl.value) return;
+  const topOffset = tabBodyEl.value.getBoundingClientRect().top;
+  const availableHeight = Math.floor(window.innerHeight - topOffset - 8);
+  tabBodyHeight.value = Math.max(420, availableHeight);
+};
+
+const tabBodyStyle = computed(() => {
+  if (viewportWidth.value < 1280) return undefined;
+  if (!tabBodyHeight.value) return undefined;
+  return { height: `${tabBodyHeight.value}px` };
+});
+
 const nextActionLabel = computed(() => {
   if (!isPickComplete.value) return "Step 1: Pick the most clinically usable report.";
   if (!isDiagnosticComplete.value) return "Step 2: Complete Diagnostic Validity for both models.";
@@ -379,6 +409,22 @@ watch(isValidityAndHallucinationComplete, async (v) => {
   severityBlockEl.value?.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
+watch(showIntro, async () => {
+  await recalcTabBodyHeight();
+});
+
+onMounted(async () => {
+  updateViewportMetrics();
+  await recalcTabBodyHeight();
+  window.addEventListener("resize", updateViewportMetrics);
+  window.addEventListener("resize", recalcTabBodyHeight);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", updateViewportMetrics);
+  window.removeEventListener("resize", recalcTabBodyHeight);
+});
+
 const sectionStateClass = (isActive: boolean) =>
   isActive
     ? "border-violet-300 bg-violet-50/75 shadow-sm"
@@ -393,7 +439,9 @@ const updateAudit = <K extends keyof ReportAudit>(id: "model1" | "model2", key: 
 const ROW_CHAR_TARGET = 110;
 const rowsForReport = (text: string) => {
   const rows = Math.ceil(text.length / ROW_CHAR_TARGET);
-  return Math.min(8, Math.max(6, rows));
+  const minRows = viewportWidth.value < 768 ? 3 : 4;
+  const maxRows = viewportHeight.value < 850 ? 5 : 7;
+  return Math.min(maxRows, Math.max(minRows, rows));
 };
 </script>
 

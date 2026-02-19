@@ -600,7 +600,7 @@ const currentReportsForHallucination = computed<
 </script>
 
 <template>
-  <div class="h-screen w-screen overflow-hidden flex flex-col bg-gradient-to-br from-sky-50 via-blue-50 to-purple-50 text-slate-900">
+  <div class="min-h-screen w-full overflow-y-auto overflow-x-hidden flex flex-col bg-gradient-to-br from-sky-50 via-blue-50 to-purple-50 text-slate-900">
     <header class="flex-shrink-0 border-b border-blue-100/70 px-6 py-2">
       <h1 class="text-base md:text-lg font-bold text-center tracking-tight text-slate-900">
         Pathologist Evaluation Interface
@@ -622,13 +622,13 @@ const currentReportsForHallucination = computed<
       />
     </div>
 
-    <main class="flex-1 min-h-0 overflow-hidden px-4 md:px-6 py-4">
+    <main class="flex-1 min-h-0 px-4 md:px-6 py-4">
       <div v-if="currentCase" class="h-full min-h-0 flex flex-col">
         <div class="hidden">
           {{ ensureActiveState() }}
         </div>
 
-        <div class="flex-1 min-h-0 overflow-hidden">
+        <div class="flex-1 min-h-0">
           <Tabs v-model="activeTab" :tabs="tabs">
             <HumanValidityTab
               v-if="activeTab === 'human-validity'"
