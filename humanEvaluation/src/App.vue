@@ -15,6 +15,7 @@ type CaseReport = {
   report: string;
   wsiDziUrl: string;
   answer: string;
+  llmOptions: string;
   llmLabel: string;
   llmHallucination: string;
   llmContext: string;
@@ -45,6 +46,8 @@ type RawSingleCase = {
     LLM_hallucination?: string;
     LLM_context?: string;
     LLM_case?: string;
+    LLM_options?: string | string[];
+    LLM_option?: string | string[];
   };
 };
 
@@ -64,6 +67,7 @@ type HallucinationEntry = {
 type HallucinationAnnotation = { model1: HallucinationEntry; model2: HallucinationEntry };
 
 const defaultReportAudit = (): ReportAudit => ({
+  nearestLabel: null,
   validity: null,
   issueType: null,
   severity: null,
@@ -136,7 +140,7 @@ const hallucinationCheck = ref<Record<string, HallucinationAnnotation>>({});
 
 function isReportAuditComplete(audit: ReportAudit | undefined) {
   if (!audit) return false;
-  return !!audit.validity && !!audit.issueType && !!audit.severity && !!audit.editDistance;
+  return !!audit.nearestLabel && !!audit.validity && !!audit.issueType && !!audit.severity && !!audit.editDistance;
 }
 
 const activeValidationReady = computed(() => {
@@ -426,6 +430,23 @@ onMounted(() => {
 
   casesPromise
     .then((payload: { mod1: RawSingleCase[]; mod2: RawSingleCase[] }) => {
+      const extractOptionTokens = (value: unknown): string[] => {
+        if (Array.isArray(value)) {
+          return value
+            .flatMap((v) => extractOptionTokens(v))
+            .map((v) => v.trim())
+            .filter((v) => v.length > 0);
+        }
+        if (typeof value !== "string") return [];
+        const raw = value.trim();
+        if (!raw) return [];
+        // Support single labels and delimited lists.
+        return raw
+          .split(/[|,;/]+/)
+          .map((v) => v.trim())
+          .filter((v) => v.length > 0);
+      };
+
       const mapOne = (c: RawSingleCase): SingleModelCase => ({
         id: c.id,
         label: c.label,
@@ -439,12 +460,14 @@ onMounted(() => {
           llmHallucination: c.model.LLM_hallucination ?? "",
           llmContext: c.model.LLM_context ?? "",
           llmCase: c.model.LLM_case ?? "",
+          llmOptions: Array.from(
+            new Set(extractOptionTokens(c.model.LLM_options).concat(extractOptionTokens(c.model.LLM_option)))
+          ).join("|"),
         },
       });
 
       prismCases.value = payload.mod1.map(mapOne);
       sfCases.value = payload.mod2.map(mapOne);
-
       const saved = loadState();
       if (saved) {
         humanValidity.value = normalizeHumanValidityState(saved.humanValidity);
@@ -553,13 +576,22 @@ watch(
 );
 
 const currentReportsForHumanValidity = computed<
-  { id: "model1" | "model2"; name: string; text: string }[]
+  { id: "model1" | "model2"; name: string; text: string; labelOptions: string[] }[]
 >(() => {
   const c = currentHumanValidityCase.value;
   if (!c) return [];
+  const parseOptions = (raw: string) =>
+    Array.from(
+      new Set(
+        raw
+          .split("|")
+          .map((v) => v.trim())
+          .filter((v) => v.length > 0)
+      )
+    );
   return [
-    { id: "model1", name: "Model 1", text: c.model1.report },
-    { id: "model2", name: "Model 2", text: c.model2.report },
+    { id: "model1", name: "Model 1", text: c.model1.report, labelOptions: parseOptions(c.model1.llmOptions) },
+    { id: "model2", name: "Model 2", text: c.model2.report, labelOptions: parseOptions(c.model2.llmOptions) },
   ];
 });
 

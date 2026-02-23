@@ -6,14 +6,15 @@
     <h2 class="text-sm md:text-base font-semibold text-slate-900">Welcome: Pathologist Evaluation Context</h2>
     <p class="mt-2 text-xs text-slate-700">
       You will evaluate AI-generated pathology reports against the displayed WSI.
-      Complete the five tasks in order for each case.
+      Complete the six tasks in order for each case.
     </p>
     <div class="mt-3 text-xs text-slate-700 space-y-1">
       <p><span class="font-semibold">1)</span> Pick the most clinically usable report.</p>
-      <p><span class="font-semibold">2)</span> Assess Diagnostic Validity.</p>
-      <p><span class="font-semibold">3)</span> Assess Hallucination content.</p>
-      <p><span class="font-semibold">4)</span> Rate Severity of issues.</p>
-      <p><span class="font-semibold">5)</span> Estimate Minimal-edit distance to a signable report.</p>
+      <p><span class="font-semibold">2)</span> Pick the nearest label for each report.</p>
+      <p><span class="font-semibold">3)</span> Assess Diagnostic Validity.</p>
+      <p><span class="font-semibold">4)</span> Assess Hallucination content.</p>
+      <p><span class="font-semibold">5)</span> Rate Severity of issues.</p>
+      <p><span class="font-semibold">6)</span> Estimate Minimal-edit distance to a signable report.</p>
     </div>
     <p class="mt-3 text-xs text-slate-600">
       Your selections are autosaved per case. Use the stepper to track completion.
@@ -34,12 +35,13 @@
     :style="tabBodyStyle"
   >
     <div class="xl:col-span-2 sticky top-0 z-20 border border-sky-200 bg-white/95 backdrop-blur-sm p-2">
-      <div class="grid grid-cols-1 md:grid-cols-5 gap-1.5 text-xs">
+      <div class="grid grid-cols-1 md:grid-cols-6 gap-1.5 text-xs">
         <div class="step-chip" :class="stepClass(isPickComplete)">1) Pick the most clinically usable report</div>
-        <div class="step-chip" :class="stepClass(isDiagnosticComplete)">2) Diagnostic Validity</div>
-        <div class="step-chip" :class="stepClass(isHallucinationComplete)">3) Hallucination Assessment</div>
-        <div class="step-chip" :class="stepClass(isSeverityComplete)">4) Severity Assessment</div>
-        <div class="step-chip" :class="stepClass(isEditDistanceComplete)">5) Minimal-edit distance</div>
+        <div class="step-chip" :class="stepClass(isNearestLabelComplete)">2) Nearest label</div>
+        <div class="step-chip" :class="stepClass(isDiagnosticComplete)">3) Diagnostic Validity</div>
+        <div class="step-chip" :class="stepClass(isHallucinationComplete)">4) Hallucination Assessment</div>
+        <div class="step-chip" :class="stepClass(isSeverityComplete)">5) Severity Assessment</div>
+        <div class="step-chip" :class="stepClass(isEditDistanceComplete)">6) Minimal-edit distance</div>
       </div>
       <p class="mt-1 text-xs text-slate-600">Next required action: <span class="font-semibold">{{ nextActionLabel }}</span></p>
     </div>
@@ -117,7 +119,32 @@
         class="rounded-none border p-2.5 min-h-0 flex-1 overflow-y-auto transition-all"
         :class="sectionStateClass(isPickComplete)"
       >
-        <h3 class="task-title text-slate-900">2) Diagnostic Validity</h3>
+        <h3 class="task-title text-slate-900">2) Pick nearest label</h3>
+        <p class="mt-1.5 text-[11px] text-slate-700 task-desc">
+          For each report, select the nearest diagnostic label from the provided list.
+        </p>
+        <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div
+            v-for="r in reports"
+            :key="`nearest-label-${r.id}`"
+            class="rounded-none border border-sky-200 bg-white p-2.5"
+          >
+            <label class="text-xs font-bold uppercase tracking-wide text-slate-700">{{ r.name }}</label>
+            <select
+              class="mt-1 w-full rounded-none border border-sky-200 bg-white p-1.5 text-xs text-slate-800"
+              :value="currentAudit(r.id).nearestLabel ?? ''"
+              @change="updateAudit(r.id, 'nearestLabel', (($event.target as HTMLSelectElement).value || null))"
+            >
+              <option value="">Select nearest label...</option>
+              <option v-for="opt in r.labelOptions" :key="opt" :value="opt">{{ opt }}</option>
+            </select>
+            <p v-if="r.labelOptions.length === 0" class="mt-1 text-[11px] text-amber-700">
+              No label options loaded from cases JSON.
+            </p>
+          </div>
+        </div>
+
+        <h3 class="mt-3 task-title text-slate-900">3) Diagnostic Validity</h3>
         <p class="mt-1.5 text-[11px] text-slate-700 task-desc">
           Assess the clinical validity and diagnostic correctness of the report based on the provided slide. Would you sign
           this report in its current form?
@@ -141,11 +168,11 @@
                 :key="opt.value"
                 type="button"
                 class="px-2.5 py-1 rounded-full text-xs font-semibold border transition-all text-left shrink-0"
-                :disabled="!isPickComplete"
+                :disabled="!isNearestLabelComplete"
                 :class="currentAudit(r.id).validity === opt.value
                   ? 'bg-sky-200 text-slate-900 border-sky-300'
                   : 'bg-sky-100/70 text-slate-700 border-sky-200'"
-                :title="!isPickComplete ? 'Complete step 1 first' : ''"
+                :title="!isNearestLabelComplete ? 'Complete steps 1 and 2 first' : ''"
                 @click="updateAudit(r.id, 'validity', opt.value)"
               >
                 {{ opt.label }}
@@ -154,7 +181,7 @@
           </div>
         </div>
 
-        <h3 class="mt-3 task-title text-slate-900">3) Hallucination Assessment</h3>
+        <h3 class="mt-3 task-title text-slate-900">4) Hallucination Assessment</h3>
         <p class="mt-1.5 text-[11px] text-slate-700 task-desc">
           Assess whether the report contains hallucinated content.
         </p>
@@ -191,7 +218,7 @@
                 :class="currentAudit(r.id).issueType === opt.value
                   ? 'bg-sky-200 text-slate-900 border-sky-300'
                   : 'bg-sky-100/70 text-slate-700 border-sky-200'"
-                :title="!isDiagnosticComplete ? 'Complete step 2 first' : ''"
+                :title="!isDiagnosticComplete ? 'Complete step 3 first' : ''"
                 @click="updateAudit(r.id, 'issueType', opt.value)"
               >
                 {{ opt.label }}
@@ -203,7 +230,7 @@
           ref="severityBlockEl"
           class="mt-3 border-t border-sky-200 pt-3"
         >
-        <h3 class="task-title text-slate-900">4) Severity Assessment</h3>
+        <h3 class="task-title text-slate-900">5) Severity Assessment</h3>
         <p class="mt-1.5 text-[11px] text-slate-700 task-desc">
           If an error or hallucination is present, rate its clinical severity.
         </p>
@@ -213,7 +240,7 @@
           <p><span class="text-[11px] font-semibold text-slate-700">MAJOR</span> - Clinically significant error that could affect diagnosis, management, or patient safety.</p>
         </div>
 
-        <p v-if="!isValidityAndHallucinationComplete" class="mt-1 text-xs text-amber-700">Complete steps 2 and 3 for both models to unlock this block.</p>
+        <p v-if="!isValidityAndHallucinationComplete" class="mt-1 text-xs text-amber-700">Complete steps 3 and 4 for both models to unlock this block.</p>
 
         <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-2">
           <div
@@ -232,7 +259,7 @@
                 :class="currentAudit(r.id).severity === opt.value
                   ? 'bg-sky-200 text-slate-900 border-sky-300'
                   : 'bg-sky-100/70 text-slate-700 border-sky-200'"
-                :title="!isValidityAndHallucinationComplete ? 'Complete steps 2 and 3 first' : ''"
+                :title="!isValidityAndHallucinationComplete ? 'Complete steps 3 and 4 first' : ''"
                 @click="updateAudit(r.id, 'severity', opt.value)"
               >
                 {{ opt.label }}
@@ -241,7 +268,7 @@
           </div>
         </div>
 
-        <h3 class="mt-3 text-xs md:text-sm font-semibold text-slate-900">5) Minimal-edit distance</h3>
+        <h3 class="mt-3 text-xs md:text-sm font-semibold text-slate-900">6) Minimal-edit distance</h3>
         <p class="mt-1.5 text-[11px] text-slate-700 task-desc">
           Estimate the amount of effort required to revise this report to a clinically signable version.
         </p>
@@ -269,7 +296,7 @@
                 :class="currentAudit(r.id).editDistance === opt.value
                   ? 'bg-sky-200 text-slate-900 border-sky-300'
                   : 'bg-sky-100/70 text-slate-700 border-sky-200'"
-                :title="!isSeverityComplete ? 'Complete step 4 first' : ''"
+                :title="!isSeverityComplete ? 'Complete step 5 first' : ''"
                 @click="updateAudit(r.id, 'editDistance', opt.value)"
               >
                 {{ opt.label }}
@@ -294,6 +321,7 @@ export type IssueType = "context_mismatch" | "case_overreach" | "no_hallucinatio
 export type Severity = "none" | "minor" | "major";
 export type EditDistance = "0-1" | "2-5" | "6-10" | ">10";
 export type ReportAudit = {
+  nearestLabel: string | null;
   validity: ClinicalValidity | null;
   issueType: IssueType | null;
   severity: Severity | null;
@@ -301,7 +329,7 @@ export type ReportAudit = {
 };
 
 const props = defineProps<{
-  reports: { id: "model1" | "model2"; name: string; text: string }[];
+  reports: { id: "model1" | "model2"; name: string; text: string; labelOptions: string[] }[];
   caseLabel: string;
   wsiDziUrl: string;
   groundTruth: string;
@@ -347,6 +375,7 @@ const editDistanceOptions: { value: EditDistance; label: string }[] = [
 const currentAudit = (id: "model1" | "model2") => (id === "model1" ? props.model1Audit : props.model2Audit);
 
 const isPickComplete = computed(() => !!props.selectedId);
+const isNearestLabelComplete = computed(() => !!props.model1Audit.nearestLabel && !!props.model2Audit.nearestLabel);
 const isDiagnosticComplete = computed(() => !!props.model1Audit.validity && !!props.model2Audit.validity);
 const isHallucinationComplete = computed(() => !!props.model1Audit.issueType && !!props.model2Audit.issueType);
 const isSeverityComplete = computed(() => !!props.model1Audit.severity && !!props.model2Audit.severity);
@@ -383,10 +412,11 @@ const tabBodyStyle = computed(() => {
 
 const nextActionLabel = computed(() => {
   if (!isPickComplete.value) return "Step 1: Pick the most clinically usable report.";
-  if (!isDiagnosticComplete.value) return "Step 2: Complete Diagnostic Validity for both models.";
-  if (!isHallucinationComplete.value) return "Step 3: Complete Hallucination Assessment for both models.";
-  if (!isSeverityComplete.value) return "Step 4: Complete Severity Assessment for both models.";
-  if (!isEditDistanceComplete.value) return "Step 5: Complete Minimal-edit distance for both models.";
+  if (!isNearestLabelComplete.value) return "Step 2: Select nearest label for both models.";
+  if (!isDiagnosticComplete.value) return "Step 3: Complete Diagnostic Validity for both models.";
+  if (!isHallucinationComplete.value) return "Step 4: Complete Hallucination Assessment for both models.";
+  if (!isSeverityComplete.value) return "Step 5: Complete Severity Assessment for both models.";
+  if (!isEditDistanceComplete.value) return "Step 6: Complete Minimal-edit distance for both models.";
   return "All steps complete for this case.";
 });
 
@@ -394,6 +424,12 @@ const stepClass = (done: boolean) =>
   done ? "border-emerald-300 bg-emerald-100 text-emerald-900" : "border-slate-200 bg-slate-100 text-slate-600";
 
 watch(isPickComplete, async (v) => {
+  if (!v) return;
+  await nextTick();
+  diagnosticBlockEl.value?.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+watch(isNearestLabelComplete, async (v) => {
   if (!v) return;
   await nextTick();
   diagnosticBlockEl.value?.scrollIntoView({ behavior: "smooth", block: "start" });
