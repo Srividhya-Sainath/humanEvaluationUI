@@ -22,7 +22,7 @@
     <button
       type="button"
       class="mt-4 px-3 py-2 border border-sky-300 bg-sky-100 text-slate-900 text-xs font-semibold"
-      @click="showIntro = false"
+      @click="$emit('start-evaluation')"
     >
       Start Evaluation
     </button>
@@ -333,6 +333,7 @@ const props = defineProps<{
   caseLabel: string;
   wsiDziUrl: string;
   groundTruth: string;
+  showIntro: boolean;
   selectedId: string | null;
   model1Audit: ReportAudit;
   model2Audit: ReportAudit;
@@ -342,9 +343,9 @@ const emit = defineEmits<{
   (e: "update:selectedId", v: string | null): void;
   (e: "update:model1Audit", v: ReportAudit): void;
   (e: "update:model2Audit", v: ReportAudit): void;
+  (e: "start-evaluation"): void;
 }>();
 
-const showIntro = ref(true);
 const tabBodyEl = ref<HTMLElement | null>(null);
 const viewportWidth = ref(0);
 const viewportHeight = ref(0);
@@ -441,9 +442,12 @@ watch(isValidityAndHallucinationComplete, async (v) => {
   severityBlockEl.value?.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
-watch(showIntro, async () => {
-  await recalcTabBodyHeight();
-});
+watch(
+  () => props.showIntro,
+  async () => {
+    await recalcTabBodyHeight();
+  }
+);
 
 onMounted(async () => {
   updateViewportMetrics();

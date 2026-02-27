@@ -261,6 +261,7 @@ type PersistedState = {
   humanValidity: Record<string, HumanValidityAnnotation>;
   hallucinationCheck: Record<string, HallucinationAnnotation>;
   autoExported: boolean;
+  humanValidityIntroDismissed: boolean;
 };
 
 function normalizeHallucinationState(
@@ -398,6 +399,7 @@ function updateHallucinationComments(modelId: "model1" | "model2", v: string) {
 }
 
 const STORAGE_KEY = "human-eval-state-v2";
+const humanValidityIntroDismissed = ref(false);
 
 function loadState(): PersistedState | null {
   try {
@@ -417,6 +419,7 @@ function saveState() {
     humanValidity: humanValidity.value,
     hallucinationCheck: hallucinationCheck.value,
     autoExported: autoExported.value,
+    humanValidityIntroDismissed: humanValidityIntroDismissed.value,
   };
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
@@ -473,6 +476,7 @@ onMounted(() => {
         humanValidity.value = normalizeHumanValidityState(saved.humanValidity);
         hallucinationCheck.value = normalizeHallucinationState(saved.hallucinationCheck);
         autoExported.value = saved.autoExported ?? false;
+        humanValidityIntroDismissed.value = saved.humanValidityIntroDismissed ?? false;
 
         const hasHvId = pairedCases.value.some((c) => c.id === saved.activeCaseIdByTab?.["human-validity"]);
         const hasAuditId = pairedCases.value.some((c) => c.id === saved.activeCaseIdByTab?.["llm-audit"]);
@@ -487,6 +491,7 @@ onMounted(() => {
       } else {
         activeCaseIdByTab.value["human-validity"] = pairedCases.value[0]?.id ?? "";
         activeCaseIdByTab.value["llm-audit"] = pairedCases.value[0]?.id ?? "";
+        humanValidityIntroDismissed.value = false;
       }
 
       if (activeCaseIdByTab.value["human-validity"]) ensureHumanValidityState(activeCaseIdByTab.value["human-validity"]);
@@ -570,7 +575,7 @@ watch(allTasksComplete, (done) => {
 });
 
 watch(
-  [humanValidity, hallucinationCheck, activeTab, activeCaseIdByTab, autoExported],
+  [humanValidity, hallucinationCheck, activeTab, activeCaseIdByTab, autoExported, humanValidityIntroDismissed],
   () => saveState(),
   { deep: true }
 );
@@ -668,12 +673,14 @@ const currentReportsForHallucination = computed<
               :caseLabel="currentHumanValidityCase?.label || ''"
               :wsiDziUrl="currentHumanValidityCase?.model1.wsiDziUrl || ''"
               :groundTruth="currentHumanValidityCase?.model1.answer || ''"
+              :showIntro="!humanValidityIntroDismissed"
               :selectedId="humanValidity[currentHumanValidityCase?.id ?? '']?.selectedId ?? null"
               :model1Audit="humanValidity[currentHumanValidityCase?.id ?? '']?.model1 ?? defaultReportAudit()"
               :model2Audit="humanValidity[currentHumanValidityCase?.id ?? '']?.model2 ?? defaultReportAudit()"
               @update:selectedId="updateHumanBestSelected"
               @update:model1Audit="updateHumanModel1Audit"
               @update:model2Audit="updateHumanModel2Audit"
+              @start-evaluation="humanValidityIntroDismissed = true"
             />
 
             <HallucinationTab
