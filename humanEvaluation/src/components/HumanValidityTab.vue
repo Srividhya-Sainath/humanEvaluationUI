@@ -188,15 +188,15 @@
         <p v-if="!isDiagnosticComplete" class="mt-1 text-xs text-amber-700">Complete Diagnostic Validity for both models to unlock this step.</p>
         <div class="mt-1.5 text-[11px] text-slate-600 space-y-0.5">
           <p>
-            <span class="text-[11px] font-semibold text-slate-700">CONTEXT MISMATCH (CTX-MIS)</span> - Report content conflicts with
+            <span class="text-[11px] font-semibold text-slate-700">CONTEXT MISMATCH</span> - Report content conflicts with
             the slide context. Ex.: Lung parenchyma incorrectly classified as skin, a single slide contains multiple tissue sites.
           </p>
           <p>
-            <span class="text-[11px] font-semibold text-slate-700">CASE-LEVEL OVERREACH (CASE-HALL)</span> - Mentions information not inferable from
+            <span class="text-[11px] font-semibold text-slate-700">CASE-LEVEL OVERREACH</span> - Mentions information not inferable from
             this slide (e.g., molecular biomarkers, lymph node status or multi-slide level information).
           </p>
           <p>
-            <span class="text-[11px] font-semibold text-slate-700">NO HALLUCINATION (NO-HALL)</span> - No unsupported or fabricated content
+            <span class="text-[11px] font-semibold text-slate-700">NO HALLUCINATION</span> - No unsupported or fabricated content
             detected.
           </p>
         </div>
